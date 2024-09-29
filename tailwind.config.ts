@@ -17,6 +17,7 @@ const config: Config = {
           50: "#F5F7F8",
           60: "#ededed",
           70: "#F6F7F8",
+          80: "#b0b0b0",
         },
       },
 
@@ -26,9 +27,11 @@ const config: Config = {
 
       backgroundImage: {
         'primary-gradient': 'linear-gradient(135deg, #C662E3, #A863F6)',
+        'primary-gradient-opacity': 'linear-gradient(135deg, rgba(198, 98, 227, 0.4), rgba(168, 99, 246, 0.5))',
       },
     },
   },
   plugins: [],
 };
+
 export default config;

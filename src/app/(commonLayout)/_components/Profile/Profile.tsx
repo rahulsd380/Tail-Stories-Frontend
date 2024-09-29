@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Profile = () => {
   return (
-    <div className="flex max-w-[280px] flex-col items-center justify-center space-y-4 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
+    <div className="flex w-full flex-col items-center justify-center space-y-4 rounded-xl bg-[#F6F7F8] p-4 border dark:bg-[#18181B] font-Lato">
       <div className="group relative">
         <Image
           width={110}
@@ -17,36 +18,33 @@ const Profile = () => {
       </div>
       <div className="space-y-1 text-center">
         <h1 className="text-2xl text-gray-700 dark:text-white/90">Nullify</h1>
-        <p className="text-sm text-gray-400">UI/UX Designer</p>
-      </div>
-      <div className="flex w-full justify-between py-2">
-        <div className="space-y-1 text-center">
-          <p className="text-gray-500 dark:text-white/70">Posts</p>
-          <p className="font-mono text-xl text-gray-700 dark:text-white/50">
-            11
-          </p>
-        </div>
-        <div className="space-y-1 text-center">
-          <p className="text-gray-500 dark:text-white/70">Following</p>
-          <p className="font-mono text-xl text-gray-700 dark:text-white/50">
-            250
-          </p>
-        </div>
-        <div className="space-y-1 text-center ">
-          <p className="text-gray-500 dark:text-white/70">Followers</p>
-          <p className="font-mono text-xl text-gray-700 dark:text-white/50">
-            11
-          </p>
-        </div>
-      </div>
-      {/* bio  */}
-      <p className="pb-2 text-center text-sm text-gray-500">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore error
-        ipsum officiis debitis quo odio?
+        <p className="text-sm text-gray-400">@rahul</p>
+        {/* bio  */}
+      <p className="pb-2 text-center text-sm text-gray-500 mt-2 max-w-[240px] mx-auto">
+        Lorem ipsum, dolor sit amet consectetur adipihg jkhgh
       </p>
-      <button className="w-full rounded-full py-2 text-[12px] font-semibold text-sky-700 ring-1 ring-sky-700 hover:bg-sky-700 hover:text-white sm:text-sm md:text-base">
-        View Profile
-      </button>
+      </div>
+      <div className="flex gap-10 items-center justify-center border-y w-full py-2">
+        <div className="space-y-1 text-center">
+          <p className="text-xl font-semibold dark:text-white/50">
+            11
+          </p>
+          <p className="text-gray-500 dark:text-white/70 text-sm">Posts</p>
+        </div>
+
+        <div className="bg-primary-30 h-10 w-0.5"></div>
+
+        <div className="space-y-1 text-center ">
+          <p className="text-xl font-semibold dark:text-white/50">
+            11
+          </p>
+          <p className="text-gray-500 dark:text-white/70 text-sm">Followers</p>
+        </div>
+      </div>
+      
+     <Link href={"/user/dashboard/my-profile"} className="text-primary-20 hover:text-primary-30 font-medium hover:underline">
+     My Profile 
+     </Link>
     </div>
   );
 };
