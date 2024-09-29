@@ -9,8 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          10: "#201E43",
+          20: "#C662E3",
+          30: "#A863F6",
+          40: "#EEEEEE",
+          50: "#F5F7F8",
+          60: "#ededed",
+          70: "#F6F7F8",
+        },
+      },
+
+      fontFamily: {
+        Lato: ["Lato", "sans-serif"],
+      },
+
+      backgroundImage: {
+        'primary-gradient': 'linear-gradient(135deg, #C662E3, #A863F6)',
       },
     },
   },
