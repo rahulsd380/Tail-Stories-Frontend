@@ -4,9 +4,10 @@ import { twMerge } from "tailwind-merge";
 interface ButtonProps {
   children: ReactNode;
   variant: "primary" | "bordered";
+  classNames?: string;
 }
 
-const Button: FC<ButtonProps> = ({ children, variant }) => {
+const Button: FC<ButtonProps> = ({ children, variant, classNames }) => {
   const baseClasses = "rounded-md transition-all duration-300";
 
   const variantClasses = {
@@ -16,8 +17,8 @@ const Button: FC<ButtonProps> = ({ children, variant }) => {
 
   const finalClasses = twMerge(
     baseClasses,
-    variant === "bordered" && "border-primary-gradient",
-    variantClasses[variant]
+    variantClasses[variant],
+    classNames
   );
 
   return (

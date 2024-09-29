@@ -1,3 +1,10 @@
+// Importing images
+import img1 from "./assets/images/1.jpg";
+import img2 from "./assets/images/2.jpg";
+import img3 from "./assets/images/3.jpg";
+
+
+// Importing icons
 import tailStoriesLogo from "./assets/tail-stories-logo.png";
 import notificationGray from "./assets/icons/notification-gray.svg";
 import notificationPurple from "./assets/icons/notification-purple.svg";
@@ -27,6 +34,14 @@ import verified from "./assets/icons/verified.svg";
 import like from "./assets/icons/like.svg";
 import share from "./assets/icons/share.svg";
 import comment from "./assets/icons/comment.svg";
+import menuDots from "./assets/icons/menu-dots.svg";
+import leftArrow from "./assets/icons/left-arrow.svg";
+import send from "./assets/icons/send.svg";
+
+
+import upvote from "./assets/icons/upvote.svg";
+import downvote from "./assets/icons/downvote.svg";
+import date from "./assets/icons/date.svg";
 
 export const ICONS = {
     notificationGray,
@@ -54,9 +69,19 @@ export const ICONS = {
     like,
     comment,
     share,
+    menuDots,
+    leftArrow,
+    send,
+
+    upvote,
+    downvote,
+    date,
 };
 
 
 export const IMAGES = {
     tailStoriesLogo,
+    img1,
+    img2,
+    img3,
 };
