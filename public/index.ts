@@ -2,6 +2,7 @@
 import img1 from "./assets/images/1.jpg";
 import img2 from "./assets/images/2.jpg";
 import img3 from "./assets/images/3.jpg";
+import authBgImage from "./assets/images/auth-bgImage.jpg";
 
 
 // Importing icons
@@ -43,6 +44,21 @@ import upvote from "./assets/icons/upvote.svg";
 import downvote from "./assets/icons/downvote.svg";
 import date from "./assets/icons/date.svg";
 
+import eyeOpen from "./assets/icons/eye-open.svg";
+import eyeClosed from "./assets/icons/eye-closed.svg";
+
+
+import copyLink from "./assets/icons/copy-link.svg";
+import bookmarkOutline from "./assets/icons/bookmark-outline.svg";
+import bookmarkFilled from "./assets/icons/bookmark-filled.svg";
+import dashboard from "./assets/icons/dashboard.svg";
+import profileDark from "./assets/icons/profile-dark.svg";
+import menu from "./assets/icons/menu.svg";
+import edit from "./assets/icons/edit.svg";
+
+
+
+
 export const ICONS = {
     notificationGray,
     notificationPurple,
@@ -76,6 +92,18 @@ export const ICONS = {
     upvote,
     downvote,
     date,
+
+    eyeOpen,
+    eyeClosed,
+
+    copyLink,
+    bookmarkFilled,
+    bookmarkOutline,
+
+    dashboard,
+    profileDark,
+    menu,
+    edit,
 };
 
 
@@ -84,4 +112,5 @@ export const IMAGES = {
     img1,
     img2,
     img3,
+    authBgImage
 };

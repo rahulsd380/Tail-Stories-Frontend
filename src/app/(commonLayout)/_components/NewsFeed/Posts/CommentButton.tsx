@@ -64,8 +64,13 @@ const CommentButton = () => {
 
     {/* Right side */}
     <div className="w-[35%] border-l pl-3 overflow-y-auto scrollbar-hide">
-      <div className="border-b pb-2">
+      <div className="border-b pb-2 flex items-cente justify-between">
         <h1 className="text-primary-10/90">Post Info</h1>
+
+        <div className="flex items-center gap-4">
+        <Image src={ICONS.bookmarkOutline} width={17} height={17} alt="bookmark-icon" />
+        <Image src={ICONS.copyLink} width={17} height={17} alt="link-icon" />
+        </div>
       </div>
 
         {/* Post info */}

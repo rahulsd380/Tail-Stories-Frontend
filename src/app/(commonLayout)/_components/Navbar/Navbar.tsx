@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ICONS, IMAGES } from "../../../../../public";
 import Button from "@/components/Reusable/Button";
 import Container from "@/components/Container/Container";
+import UserDropdown from './UserDropdown';
+import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
   const user = true;
@@ -23,17 +25,20 @@ const Navbar = () => {
             Tail Stories
           </Link>
 
-          <div>
+          <div className="hidden lg:block">
             <input 
             placeholder="Find post"
             type="text" 
             className="bg-primary-70 px-3 py-[10px] rounded-lg border border-primary-30 focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow" />
           </div>
+          
         </div>
+
+        
 
         {
           user ? 
-        <div className="flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
 
            {/* Theme icon */}
            <div>
@@ -92,7 +97,7 @@ const Navbar = () => {
           </div>
          
           {/* USer dropdown menu */}
-          <div className="bg-primary-70 p-2 rounded-3xl border border-primary-30 focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow flex items-center gap-3">
+          {/* <div className="bg-primary-70 p-2 rounded-3xl border border-primary-30 focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow flex items-center gap-3">
               <div className="size-8 rounded-full bg-primary-30"></div>
               <div className="flex items-center gap-[6px]">
               <h1 className="font-medium">Rahul Sutradhar</h1>
@@ -104,7 +109,8 @@ const Navbar = () => {
               className="dark:hidden cursor-pointer"
           />
               </div>
-          </div>
+          </div> */}
+          <UserDropdown/>
         </div>
           :
         <div className="flex items-center gap-4">
@@ -117,6 +123,7 @@ const Navbar = () => {
           <Button variant="primary">Create Account</Button>
         </div>
         }
+        <HamburgerMenu/>
       </div>
     </Container>
   );

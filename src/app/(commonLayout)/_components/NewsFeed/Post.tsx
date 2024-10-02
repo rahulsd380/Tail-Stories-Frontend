@@ -43,7 +43,7 @@ const Post = () => {
                     height={25}
                     alt="icon"
                     />
-                    <h1 className="font-semibold text-primary-10">{icon.label}</h1>
+                    <h1 className="font-semibold text-primary-10/70">{icon.label}</h1>
                 </div>
                     )
                 }
