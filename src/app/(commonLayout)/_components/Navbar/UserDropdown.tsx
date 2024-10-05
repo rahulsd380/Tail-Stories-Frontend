@@ -78,7 +78,7 @@ const UserDropdown = () => {
           {userMenuItems.map((item, index) => (
             <Link href={"/"} 
               key={index}
-              className={`rounded-sm px-3 py-2 ${open ? 'opacity-100 duration-500' : 'opacity-0 duration-150'} hover:bg-sky-500 flex items-center gap-3 text-primary-10/70 text-sm`}
+              className={`rounded-sm px-3 py-2 ${open ? 'opacity-100 duration-500' : 'opacity-0 duration-150'} hover:bg-primary-gradient hover:text-white flex items-center gap-3 text-primary-10/70 text-sm`}
               style={{ transform: `translateY(${open ? 0 : (index + 1) * 10}px)`}}
             >
               <Image
