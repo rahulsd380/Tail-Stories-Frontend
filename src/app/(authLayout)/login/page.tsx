@@ -6,6 +6,11 @@ import { useForm } from "react-hook-form";
 import { ICONS } from '../../../../public/index';
 import Button from "@/components/Reusable/Button";
 import Link from "next/link";
+import { useLoginMutation } from "@/redux/features/Auth/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { useRouter } from "next/navigation";
+import { setUser } from "@/redux/features/Auth/authSlice";
+import { verifyToken } from "@/utils/verifyToken";
 
 type TLoginData = {
     email: string;
@@ -13,6 +18,10 @@ type TLoginData = {
   };
 
 const Login = () => {
+  const [login, { isLoading: isLoginIn }] = useLoginMutation();
+  const router = useRouter();
+
+  const dispatch = useAppDispatch();
     const {
         register,
         handleSubmit,
@@ -21,29 +30,22 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async (data: TLoginData) => {
-        console.log(data);
-        // const loginData = {
-        //   email: data.email,
-        //   password: data.password,
-        // };
-    
-        // try {
-        //   const response = await login(loginData).unwrap();
-        //   const user = verifyToken(response.data?.accessToken);
-        //   dispatch(setUser({ user, token: response.data.accessToken }));
-        //   CustomToast({
-        //     title: "Welcome back!!",
-        //     message: "Explore new bikes",
-        //     icon: successIcon,
-        //   });
-        //   navigate("/dashboard");
-        // } catch (err) {
-        //   CustomToast({
-        //     title: "Invalid email or password",
-        //     icon: errorIcon,
-        //   });
-        // }
+      const loginData = {
+        email: data.email,
+        password: data.password,
       };
+  
+      try {
+        const response = await login(loginData).unwrap();
+        const user = verifyToken(response.data?.accessToken);
+        dispatch(setUser({ user, token: response.data.accessToken }));
+        alert("Logged in")
+        router.push("/");
+      } catch (err) {
+        console.log(err)
+      }
+    };
+
     return (
           <div className="w-full">
           
@@ -145,8 +147,7 @@ const Login = () => {
             </div>
 
             <Button variant="primary">
-                {/* {isLoginIn ? "Login In..." : "Login"} */}
-                Login
+                {isLoginIn ? "Login In..." : "Login"}
             </Button>
 
             <p className="max-w-[500px] text-sm text-[#364F53] dark:text-[#D9D9D9]/50 text-center">

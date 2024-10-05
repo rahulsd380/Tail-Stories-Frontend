@@ -5,45 +5,49 @@ import { useForm } from "react-hook-form";
 import { ICONS } from '../../../../public/index';
 import Button from "@/components/Reusable/Button";
 import Link from "next/link";
+import { useSignupMutation } from "@/redux/features/Auth/authApi";
+import { useRouter } from "next/navigation";
 
-type TSignData = {
+type TSignUpData = {
     name:string
     email: string;
     password: string;
   };
 
 const Signup = () => {
+  const router = useRouter();
+  const [signup, {isLoading : isSigningUp}] = useSignupMutation();
     const {
         register,
         handleSubmit,
         formState: { errors },
-      } = useForm<TSignData>();
+      } = useForm<TSignUpData>();
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSignup = async (data: TSignData) => {
-        console.log(data);
-        // const loginData = {
-        //   email: data.email,
-        //   password: data.password,
-        // };
-    
-        // try {
-        //   const response = await login(loginData).unwrap();
-        //   const user = verifyToken(response.data?.accessToken);
-        //   dispatch(setUser({ user, token: response.data.accessToken }));
-        //   CustomToast({
-        //     title: "Welcome back!!",
-        //     message: "Explore new bikes",
-        //     icon: successIcon,
-        //   });
-        //   navigate("/dashboard");
-        // } catch (err) {
-        //   CustomToast({
-        //     title: "Invalid email or password",
-        //     icon: errorIcon,
-        //   });
-        // }
+    const handleSignup = async (data: TSignUpData) => {
+      const signupData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
       };
+  
+      try{
+        const response = await signup(signupData).unwrap();
+        console.log(response);
+      if(response.success) {
+
+        console.log("Signup successful");
+        router.push("/login");
+      }
+      }catch(err){
+        console.log(err)
+        return;
+      }
+      
+    };
+
+
+
     return (
           <div className="w-full">
           
@@ -165,8 +169,7 @@ const Signup = () => {
             </div>
 
             <Button variant="primary">
-                {/* {isLoginIn ? "Login In..." : "Login"} */}
-                Login
+                {isSigningUp ? "Creating Account..." : "Sign Up"}
             </Button>
 
             <p className="max-w-[500px] text-sm text-[#364F53] dark:text-[#D9D9D9]/50 text-center">

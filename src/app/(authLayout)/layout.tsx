@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { IMAGES } from '../../../public';
 import Link from 'next/link';
 import Image from "next/image";
+import ClientProvider from '@/providers/ClientProvider';
 
 const AuthLayout = ({children} : {children : ReactNode}) => {
     return (
@@ -21,7 +22,9 @@ const AuthLayout = ({children} : {children : ReactNode}) => {
             Tail Stories
           </Link>
             <div className="flex items-center justify-center flex-1">
-            {children}
+           <ClientProvider>
+           {children}
+           </ClientProvider>
                 </div>
                 </div>
 
