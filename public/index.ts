@@ -56,10 +56,13 @@ import profileDark from "./assets/icons/profile-dark.svg";
 import menu from "./assets/icons/menu.svg";
 import edit from "./assets/icons/edit.svg";
 
+import cross from "./assets/icons/cross.svg";
+
 
 
 
 export const ICONS = {
+    cross,
     notificationGray,
     notificationPurple,
     emailGray,

@@ -42,7 +42,7 @@ const Profile = () => {
         </div>
       </div>
       
-     <Link href={"/user/dashboard/my-profile"} className="text-primary-20 hover:text-primary-30 font-medium hover:underline">
+     <Link href={"/dashboard/my-profile"} className="text-primary-20 hover:text-primary-30 font-medium hover:underline">
      My Profile 
      </Link>
     </div>
