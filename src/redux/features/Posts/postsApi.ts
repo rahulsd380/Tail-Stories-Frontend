@@ -10,22 +10,23 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: postContent,
       }),
+      invalidatesTags: ["posts"]
     }),
 
-    getAllPosts: builder.mutation({
+    getAllPosts: builder.query({
       query: () => ({
         method: "GET",
         url: "/posts",
       }),
-      invalidatesTags : ["posts"]
+      providesTags : ["posts"]
     }),
 
-    getSinglePostById: builder.mutation({
+    getSinglePostById: builder.query({
       query: (postId) => ({
         method: "GET",
         url: `/posts/${postId}`,
       }),
-      invalidatesTags : ["posts"]
+      providesTags : ["posts"]
     }),
 
     updatePost: builder.mutation({
@@ -34,7 +35,7 @@ const authApi = baseApi.injectEndpoints({
         url: `/posts/${id}`,
         body: updatedPostData,
       }),
-      invalidatesTags: ["users"]
+      invalidatesTags: ["posts"]
     }),
 
 
@@ -46,8 +47,36 @@ const authApi = baseApi.injectEndpoints({
         invalidatesTags : ["posts"]
       }),
     
+      upvotePost: builder.mutation({
+        query: ({ postId, userId }) => ({
+          method: "POST",
+          url: `/posts/${postId}/upvote`,
+          body: { userId },
+        }),
+        invalidatesTags: ["posts"],
+      }),
+  
+      // Downvote mutation
+      downvotePost: builder.mutation({
+        query: ({ postId, userId }) => ({
+          method: "POST",
+          url: `/posts/${postId}/downvote`,
+          body: { userId },
+        }),
+        invalidatesTags: ["posts"],
+      }),
+
+      commentOnPost: builder.mutation({
+        query: ({postId, commentData}) => ({
+          method: "POST",
+          url: `/posts/${postId}/comment`,
+          body: commentData ,
+        }),
+        invalidatesTags: ["posts"],
+      }),
+    
 
   }),
 });
 
-export const { useCreatePostMutation, useGetAllPostsMutation, useGetSinglePostByIdMutation, useUpdatePostMutation, useDeletePostMutation } = authApi;
+export const { useCreatePostMutation, useGetAllPostsQuery, useGetSinglePostByIdQuery, useUpdatePostMutation, useDeletePostMutation, useUpvotePostMutation, useDownvotePostMutation, useCommentOnPostMutation } = authApi;

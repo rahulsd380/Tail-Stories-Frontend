@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/features/Auth/authSlice";
 import { verifyToken } from "@/utils/verifyToken";
+import { toast } from 'sonner';
 
 type TLoginData = {
     email: string;
@@ -39,7 +40,7 @@ const Login = () => {
         const response = await login(loginData).unwrap();
         const user = verifyToken(response.data?.accessToken);
         dispatch(setUser({ user, token: response.data.accessToken }));
-        alert("Logged in")
+        toast.success('Logged in successfully.');
         router.push("/");
       } catch (err) {
         console.log(err)

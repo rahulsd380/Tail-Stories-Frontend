@@ -8,15 +8,60 @@ import PostDescription from "./PostDescription";
 import PostImages from "./PostImages";
 import Comments from "./Comments";
 import Button from "@/components/Reusable/Button";
+import { TVote } from "./posts.types";
+import { useUpvotePostMutation, useDownvotePostMutation } from "@/redux/features/Posts/postsApi";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
 
-const CommentButton = () => {
+type TComment = {
+  postId:string
+  postedAt:string;
+  category:string;
+  upvotes : TVote[];
+  downvotes : TVote[];
+  title:string;
+  description:string;
+  images:string[];
+  // comments:TComment[]
+}
+
+const CommentButton:React.FC<TComment> = ({description, title, images, category, upvotes, downvotes, postedAt, postId, comments}) => {
+  const user = useAppSelector(selectCurrentUser);
+  const [upvotePost] = useUpvotePostMutation();
+  const [downvotePost] = useDownvotePostMutation();
   const [openPostModal, setOpenPostModal] = useState<boolean>(false);
 
-  const user = {
+  const userInfo = {
     username: "Rahul Sutradhar",
     profileImage: IMAGES.img1,
     isVerified: true,
     timeAgo: "1 hr ago"
+  };
+
+  const handleUpvote = async () => {
+    const upvoteData = {
+      postId: postId,
+      userId: user?.userId
+    }
+    try{
+      const res = await upvotePost(upvoteData).unwrap();
+      console.log(res)
+    } catch(err){
+      console.log(err)
+    }
+  };
+
+  const handleDownvote = async () => {
+    const downvoteData = {
+      postId: postId,
+      userId: user?.userId
+    }
+    try{
+      const res = await downvotePost(downvoteData).unwrap();
+      console.log(res)
+    } catch(err){
+      console.log(err)
+    }
   };
 
   return (
@@ -32,7 +77,7 @@ const CommentButton = () => {
       <Modal
   openModal={openPostModal}
   setOpenModal={setOpenPostModal}
-  classNames="max-w-[1000px] h-[500px] p-4"
+  classNames="max-w-[1000px] w-full h-[500px] p-4"
 >
 
     {/* Header */}
@@ -55,10 +100,10 @@ const CommentButton = () => {
     <div className="w-[65%] overflow-y-auto scrollbar-hide">
     
       <div className="space-y-3">
-        <PostUserName user={user} />
-        <PostDescription />
-        <PostImages />
-        <Comments />
+        <PostUserName user={userInfo} />
+        <PostDescription title={title} description={description}/>
+        <PostImages images={images}/>
+        <Comments postId={postId} comments={comments}/>
       </div>
     </div>
 
@@ -85,34 +130,38 @@ const CommentButton = () => {
         <div className="flex flex-col gap-4">
           <div className="px-3 py-1 flex justify-center items-center gap-3 border rounded-md text-primary-10/70 w-fit">
             <Image src={ICONS.pet} width={17} height={17} alt="date-icon" />
-            Pets Health
+            {category}
           </div>
 
           <div className="px-3 py-1 flex justify-center items-center gap-3 border rounded-md text-primary-10/70 w-fit">
             <Image src={ICONS.date} width={17} height={17} alt="date-icon" />
-            12 Sep, 2024
+            {postedAt}
           </div>
 
           <div className="px-3 py-1 flex justify-center items-center gap-3 border rounded-md text-primary-10/70 w-fit">
             <Image src={ICONS.upvote} width={20} height={20} alt="upvote-icon" />
-            123
+            {upvotes?.length}
           </div>
 
           <div className="px-3 py-1 flex justify-center items-center gap-3 border rounded-md text-primary-10/70 w-fit">
             <Image src={ICONS.downvote} width={20} height={20} alt="downvote-icon" />
-            50
+            {downvotes?.length}
           </div>
         </div>
       </div>
 
 
       <div className="flex items-center justify-between gap-4 w-full mt-5">
+      <button onClick={handleDownvote}>
       <Button variant="bordered" classNames="w-full">
             Downvote
         </Button>
+      </button>
+        <button onClick={handleUpvote}>
         <Button variant="primary" classNames="w-full">
             Upvote
         </Button>
+        </button>
         
       </div>
     </div>

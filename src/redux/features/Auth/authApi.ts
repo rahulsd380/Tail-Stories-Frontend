@@ -27,6 +27,14 @@ const authApi = baseApi.injectEndpoints({
       // invalidatesTags : ["products"]
     }),
 
+    getmyPosts: builder.query({
+      query: (authorId) => ({
+        method: "GET",
+        url: `users/my-posts/${authorId}`,
+      }),
+      // invalidatesTags : ["products"]
+    }),
+
     updateProfile: builder.mutation({
       query: (profileUpdatedData) => ({
         method: "PUT",
@@ -40,4 +48,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useSignupMutation, useGetMeQuery, useUpdateProfileMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useGetMeQuery, useUpdateProfileMutation, useGetmyPostsQuery } = authApi;

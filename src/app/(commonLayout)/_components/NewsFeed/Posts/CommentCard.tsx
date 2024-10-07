@@ -2,10 +2,11 @@ import Image, { StaticImageData } from "next/image";
 import { ICONS } from "../../../../../../public";
 
 interface ICommentInfo {
-  username: string;
+  authorId: string;
   profileImage?: StaticImageData;
-  timeAgo: string;
+  commentedAt: string;
   comment: string;
+  likes:number
 }
 
 interface CommentCardProps {
@@ -13,7 +14,7 @@ interface CommentCardProps {
 }
 
 const CommentCard: React.FC<CommentCardProps> = ({ commentInfo }) => {
-  const { username, profileImage, timeAgo, comment } = commentInfo;
+  const { authorId, profileImage, commentedAt, comment, likes } = commentInfo;
 
   return (
     <div className="flex gap-4 bg-primary-70 p-3 rounded-md">
@@ -34,9 +35,9 @@ const CommentCard: React.FC<CommentCardProps> = ({ commentInfo }) => {
       <div className="w-full flex-1">
         <div className="flex flex-1 items-center gap-3">
           {/* Username */}
-          <h1 className="font-semibold text-primary-10">{username}</h1>
+          <h1 className="font-semibold text-primary-10">{authorId}</h1>
 
-          <p className="text-xs text-primary-10/50">{timeAgo}</p>
+          <p className="text-xs text-primary-10/50">{commentedAt}</p>
         </div>
 
         {/* Time ago */}
@@ -51,7 +52,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ commentInfo }) => {
                 height={20}
                 alt="verified-icon"
               />
-              20K
+              {likes?.length > 0 ? likes?.length : 0}
             </div>
             <p className="text-sm text-primary-10/80">Reply</p>
           </div>

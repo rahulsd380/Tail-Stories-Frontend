@@ -1,8 +1,12 @@
 
 
-const PostDescription = () => {
+const PostDescription = ({description, title}:{description:string, title:string}) => {
     return (
-        <p className="text-sm text-primary-10/80 font-Lato">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ipsam ab ullam ipsa ratione neque magni est inventore! Molestiae itaque esse ea rerum assumenda omnis totam ipsa sapiente atque soluta!</p>
+       <div>
+        <h1 className="font-semibold text-primary-10">{title ? title : ""}</h1>
+         <p className="text-sm text-primary-10/80 font-Lato mt-2" dangerouslySetInnerHTML={{ __html: description
+        }}/>
+        </div>
     );
 };
 

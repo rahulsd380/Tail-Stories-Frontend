@@ -25,14 +25,20 @@ const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSignup = async (data: TSignUpData) => {
+      const formData = new FormData();
+
       const signupData = {
         name: data.name,
         email: data.email,
         password: data.password,
       };
+      console.log(signupData);
+
+      formData.append("data", JSON.stringify(signupData));
+
   
       try{
-        const response = await signup(signupData).unwrap();
+        const response = await signup(formData).unwrap();
         console.log(response);
       if(response.success) {
 

@@ -57,11 +57,13 @@ import menu from "./assets/icons/menu.svg";
 import edit from "./assets/icons/edit.svg";
 
 import cross from "./assets/icons/cross.svg";
+import user from "./assets/icons/user.svg";
 
 
 
 
 export const ICONS = {
+    user,
     cross,
     notificationGray,
     notificationPurple,

@@ -10,6 +10,7 @@ import { useRef, useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
 import { useCreatePostMutation } from "@/redux/features/Posts/postsApi";
+import { toast } from 'sonner'
 
 
 type TPostData = {
@@ -103,8 +104,7 @@ const Post = () => {
             const response = await createPost(formData).unwrap();
             console.log(response);
           if(response.success) {
-    
-            console.log("Post created successfully.");
+            toast.success('Post created successfully.');
           }
           }catch(err){
             console.log(err)
