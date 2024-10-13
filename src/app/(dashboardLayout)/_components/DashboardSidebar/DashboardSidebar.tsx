@@ -122,7 +122,7 @@ const DashboardSidebar = () => {
         <p className="text-start text-[0.9rem] text-gray-500">Main</p>
 
         <div className="mt-3 flex flex-col gap-[5px]">
-          {user?.role === "user" ? (
+          {user && user?.role === "user" ? (
             userLinks.map((link, index) => (
               <Link
                 key={index}
