@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Navbar from "./_components/Navbar/Navbar";
+import Navbar from "../../components/Home/Navbar/Navbar";
 import ClientProvider from "@/providers/ClientProvider";
 import { Toaster } from 'sonner'
 

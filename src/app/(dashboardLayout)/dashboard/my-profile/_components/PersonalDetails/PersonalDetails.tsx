@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import { useUpdateProfileMutation } from '@/redux/features/Auth/authApi';
 import { toast } from 'sonner'
-import { TUser } from "@/app/(commonLayout)/_components/People/user.types";
+import { TUser } from "@/components/Home/People/user.types";
 
 type TDetails={
   name:string;

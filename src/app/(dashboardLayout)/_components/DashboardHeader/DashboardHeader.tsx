@@ -1,4 +1,4 @@
-import UserDropdown from '@/app/(commonLayout)/_components/Navbar/UserDropdown';
+import UserDropdown from '@/components/Home/Navbar/UserDropdown';
 import Image from 'next/image';
 import React from 'react';
 import { ICONS } from '../../../../../public';

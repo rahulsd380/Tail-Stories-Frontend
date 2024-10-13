@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode, useState } from "react";
-import { ICONS, IMAGES } from "../../../../../../public";
+import { ICONS, IMAGES } from "../../../../../public";
 import Modal from "@/components/Modal/Modal";
 import PostUserName from "@/components/Reusable/PostUserName";
 import PostDescription from "./PostDescription";

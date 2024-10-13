@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ICONS } from "../../../../../../public";
+import { ICONS } from "../../../../../public";
 import CommentCard from "./CommentCard";
 import { useCommentOnPostMutation } from "@/redux/features/Posts/postsApi";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";

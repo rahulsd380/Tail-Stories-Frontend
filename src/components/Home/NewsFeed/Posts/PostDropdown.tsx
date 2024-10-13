@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { ICONS } from "../../../../../../public";
+import { ICONS } from "../../../../../public";
 
 const PostDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);

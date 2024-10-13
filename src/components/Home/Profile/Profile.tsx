@@ -3,7 +3,7 @@ import { useGetMeQuery, useGetmyPostsQuery } from "@/redux/features/Auth/authApi
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ICONS } from "../../../../../public";
+import { ICONS } from "../../../../public";
 
 const Profile = () => {
   const {data} = useGetMeQuery({});

@@ -1,7 +1,7 @@
 import React from 'react';
 import CreatePost from './CreatePost';
-import PostCard from '@/app/(commonLayout)/_components/NewsFeed/Posts/PostCard';
-import { TPost } from '@/app/(commonLayout)/_components/NewsFeed/Posts/posts.types';
+import PostCard from '@/components/Home/NewsFeed/Posts/PostCard';
+import { TPost } from '@/components/Home/NewsFeed/Posts/posts.types';
 
 const MyPosts = ({myPosts} : {myPosts:TPost[]}) => {
     return (

@@ -2,10 +2,10 @@
 "use client"
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { ICONS } from "../../../../../public";
+import { ICONS } from "../../../../public";
 import Modal from "@/components/Modal/Modal";
 import InputField from "@/components/InputField/InputField";
-import SelectDropdown from './../../../../components/SelectDropdown/SelectDropdown';
+import SelectDropdown from '../../SelectDropdown/SelectDropdown';
 import JoditEditor from "jodit-react";
 import { useRef, useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/hooks";

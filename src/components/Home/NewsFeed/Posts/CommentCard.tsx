@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import { ICONS } from "../../../../../../public";
+import { ICONS } from "../../../../../public";
 import CommentDropdown from "./CommentDropdown";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

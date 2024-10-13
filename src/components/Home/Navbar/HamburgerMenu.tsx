@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ICONS } from "../../../../../public";
+import { ICONS } from "../../../../public";
 import Image from "next/image";
 
 const HamburgerMenu = () => {

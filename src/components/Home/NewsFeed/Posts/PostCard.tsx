@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { ICONS } from "../../../../../../public";
+import { ICONS } from "../../../../../public";
 import PostDropdown from "./PostDropdown";
 import ShareButton from "./ShareButton";
 import CommentButton from "./CommentButton";

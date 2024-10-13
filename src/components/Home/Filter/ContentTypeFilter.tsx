@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { ICONS } from '../../../../../public';
+import { ICONS } from '../../../../public';
 import { useGetAllPostsQuery } from '@/redux/features/Posts/postsApi';
 import { TPost } from '../NewsFeed/Posts/posts.types';
 type TContentTypeFilter = {

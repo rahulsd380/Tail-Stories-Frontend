@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { ICONS } from "../../../../../../public";
+import { ICONS } from "../../../../../public";
 
 const ShareButton = () => {
   return (

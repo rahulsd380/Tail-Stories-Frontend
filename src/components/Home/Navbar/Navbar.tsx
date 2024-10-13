@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { ICONS, IMAGES } from "../../../../../public";
+import { ICONS, IMAGES } from "../../../../public";
 import Button from "@/components/Reusable/Button";
 import Container from "@/components/Container/Container";
 import UserDropdown from "./UserDropdown";
@@ -119,7 +119,9 @@ const Navbar = () => {
             <Link href={"/login"}>
               <Button variant="bordered">Login</Button>
             </Link>
-            <Button variant="primary">Create Account</Button>
+            <Link href={"/signup"}>
+              <Button variant="primary">Create Account</Button>
+            </Link>
           </div>
         )}
         <HamburgerMenu />

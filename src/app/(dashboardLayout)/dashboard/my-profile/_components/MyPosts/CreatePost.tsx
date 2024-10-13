@@ -1,4 +1,4 @@
-import Post from '@/app/(commonLayout)/_components/NewsFeed/Post';
+import Post from '@/components/Home/NewsFeed/Post';
 import React from 'react';
 
 const CreatePost = () => {

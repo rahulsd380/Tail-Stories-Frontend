@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ICONS } from "../../../../../public";
+import { ICONS } from "../../../../public";
 import Link from "next/link";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";

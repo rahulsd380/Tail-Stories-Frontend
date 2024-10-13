@@ -1,8 +1,8 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { IMAGES, ICONS } from '../../../../../public';
-import { useFollowUserMutation, useUnfollowUserMutation } from '../../../../redux/features/Auth/authApi';
+import { IMAGES, ICONS } from '../../../../public';
+import { useFollowUserMutation, useUnfollowUserMutation } from '../../../redux/features/Auth/authApi';
 import { useGetMeQuery } from '@/redux/features/Auth/authApi';
 import { TUser } from './user.types';
 

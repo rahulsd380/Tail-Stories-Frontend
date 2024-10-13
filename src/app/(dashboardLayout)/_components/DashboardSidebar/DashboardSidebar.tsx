@@ -18,7 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
-import { TUser } from "@/app/(commonLayout)/_components/People/user.types";
+import { TUser } from "@/components/Home/People/user.types";
 
 const userLinks = [
   {
