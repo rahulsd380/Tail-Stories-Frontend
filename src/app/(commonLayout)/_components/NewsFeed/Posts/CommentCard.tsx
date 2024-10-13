@@ -1,11 +1,16 @@
 'use client'
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { ICONS } from "../../../../../../public";
 import CommentDropdown from "./CommentDropdown";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useEditCommentMutation } from "@/redux/features/Posts/postsApi";
 import { TComment } from "./posts.types";
+import { useGetUserByIdQuery } from '@/redux/features/Auth/authApi';
+import moment from 'moment';
+import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { TUser } from "./Comments";
 
 
 
@@ -21,12 +26,14 @@ type TUpdateCommentData = {
 }
 
 const CommentCard: React.FC<CommentCardProps> = ({ commentInfo, postId, handleDeleteComment }) => {
-  const { authorId, profileImage, commentedAt, comment, likes, _id } = commentInfo;
+  const user = useAppSelector(selectCurrentUser) as TUser | null;
+  const { authorId, commentedAt, comment, likes, _id } = commentInfo;
+
+  const {data} = useGetUserByIdQuery(authorId);
   const [editComment, {isLoading:isCommentEditing}] = useEditCommentMutation();
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<TUpdateCommentData>();
 const [isEditExpanded, setIsEditExpanded] = useState(false);
 
@@ -52,16 +59,23 @@ const handleEditComment = async (data : TUpdateCommentData) => {
   return (
     <div className="flex gap-4 bg-primary-70 p-3 rounded-md">
       {/* Profile Image */}
-      {profileImage ? (
+      {data?.data?.profilePicture ? (
         <Image
-          src={profileImage}
+          src={data?.data?.profilePicture}
           width={40}
           height={40}
           className="rounded-full size-10"
           alt={`${authorId}-profile-image`}
         />
       ) : (
-        <div className="size-10 rounded-full bg-primary-20"></div>
+        <div className="size-10 rounded-full bg-primary-20">
+          <Image
+          className="size-9 rounded-full"
+          src={ICONS.user}
+          alt="card navigate ui"
+        />
+        </div>
+        
       )}
 
       {/* Profile / header */}
@@ -69,11 +83,16 @@ const handleEditComment = async (data : TUpdateCommentData) => {
        <div className="flex items-center justify-between">
        <div className="flex flex-1 items-center gap-3">
           {/* Username */}
-          <h1 className="font-semibold text-primary-10">{authorId}</h1>
+          <h1 className="font-semibold text-primary-10">{data?.data?.name}</h1>
 
-          <p className="text-xs text-primary-10/50">{commentedAt}</p>
+          <p className="text-xs text-primary-10/50">{moment(commentedAt).format("DDMMM YYYY")}</p>
         </div>
-        <CommentDropdown setIsEditExpanded={setIsEditExpanded} handleDeleteComment={handleDeleteComment} commentId={_id}/>
+        {
+          user?.userId === data?.data?._id ?
+          <CommentDropdown setIsEditExpanded={setIsEditExpanded} handleDeleteComment={handleDeleteComment} commentId={_id}/>
+          :
+          ""
+        }
 
        </div>
 
@@ -118,7 +137,7 @@ const handleEditComment = async (data : TUpdateCommentData) => {
                 height={20}
                 alt="verified-icon"
               />
-              {likes?.length > 0 ? likes?.length : 0}
+               {likes > 0 ? likes : 0}
             </div>
             <p className="text-sm text-primary-10/80">Reply</p>
           </div>

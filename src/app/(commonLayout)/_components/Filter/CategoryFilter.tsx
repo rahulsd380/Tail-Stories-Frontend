@@ -1,8 +1,13 @@
-import Image from 'next/image';
 import React from 'react';
 import { useGetAllPostsQuery } from '@/redux/features/Posts/postsApi';
-import { ICONS } from '../../../../../public';
 import { TPost } from '../NewsFeed/Posts/posts.types';
+import { MdPostAdd } from "react-icons/md";
+import { MdOutlineTipsAndUpdates } from "react-icons/md";
+import { BsClockHistory } from "react-icons/bs";
+
+
+
+
 type TCategoryFilterProps = {
   selectedCategory: string | null;
   setSelectedCategory: (category: string | null) => void;
@@ -15,13 +20,13 @@ const CategoryFilter:React.FC<TCategoryFilterProps> = ({ setSelectedCategory, se
   const categories = [
     {
       label: "Tip",
-      icon: ICONS.pet,
+      icon: <MdOutlineTipsAndUpdates className="text-lg"/>,
       postLength: tip?.length,
       bgClass: selectedCategory === "Tip" ? "bg-primary-gradient text-white" : "bg-primary-70 text-primary-10/70"
     },
     {
       label: "Story",
-      icon: ICONS.pet,
+      icon: <BsClockHistory className="" />,
       postLength: story?.length,
       bgClass: selectedCategory === "Story" ? "bg-primary-gradient text-white" : "bg-primary-70 text-primary-10/70"
     },
@@ -40,12 +45,7 @@ const CategoryFilter:React.FC<TCategoryFilterProps> = ({ setSelectedCategory, se
           className={`${selectedCategory === null ? "bg-primary-gradient text-white" : "bg-primary-70 text-primary-10/70"} font-medium flex items-center justify-between text-[15px] rounded-md px-3 py-3 w-full`} // Change background and text color for "All"
         >
           <div className="flex items-center gap-2">
-            <Image
-              src={ICONS.pet} // Use an appropriate icon for "All"
-              width={20}
-              height={20}
-              alt="All"
-            />
+          <MdPostAdd />
             <h1>All</h1>
           </div>
           <h1>{allPosts?.data?.length}</h1>
@@ -59,12 +59,7 @@ const CategoryFilter:React.FC<TCategoryFilterProps> = ({ setSelectedCategory, se
             className={`${category.bgClass} font-medium flex items-center justify-between text-[15px] rounded-md px-3 py-3 w-full`} // Apply dynamic class
           >
             <div className="flex items-center gap-2">
-              <Image
-                src={category.icon}
-                width={20}
-                height={20}
-                alt={category.label}
-              />
+            {category.icon}
               <h1>{category.label}</h1>
             </div>
             <h1>{category?.postLength}</h1>

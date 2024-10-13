@@ -8,7 +8,7 @@ import { TUser } from './user.types';
 
 const PeopleCard = ({ user }:{user:TUser}) => {
   const [isFollowing, setIsFollowing] = useState(false); 
-  const { data, isLoading: isProfileLoading } = useGetMeQuery({});
+  const { data } = useGetMeQuery({});
 
   const [followUser] = useFollowUserMutation();
   const [unfollowUser] = useUnfollowUserMutation();

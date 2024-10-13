@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
 
-const PostImages = ({ images }: { images: string[] }) => {
+type TPostImagesProps = {
+  images: string[];
+};
+
+const PostImages:React.FC<TPostImagesProps> = ({ images }) => {
   if (images?.length === 1) {
     return (
       <div className="flex gap-3 border-b pb-3 mt-3">

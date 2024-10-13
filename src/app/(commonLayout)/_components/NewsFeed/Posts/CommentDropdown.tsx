@@ -3,7 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ICONS } from "../../../../../../public";
 
-const CommentDropdown = ({setIsEditExpanded, handleDeleteComment, commentId}) => {
+type TCommentDropdownProps ={
+  setIsEditExpanded: (isExpanded: boolean) => void;
+  handleDeleteComment: (commentId: string) => void;
+  commentId: string;
+}
+
+const CommentDropdown : React.FC<TCommentDropdownProps>= ({setIsEditExpanded, handleDeleteComment, commentId}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

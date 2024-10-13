@@ -28,26 +28,23 @@ const Myprofile = () => {
 
     
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         if (file) {
             setImageFile(file);
+            await uploadProfileImage();
+
         }
     };
     
     const uploadProfileImage = async () => {
         const formData = new FormData();
-        
+    
         if (imageFile) {
             formData.append("file", imageFile);
         } else {
             console.log("No image file found to upload.");
             return;
-        }
-    
-        // To verify if file is appended
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}:`, value);
         }
     
         try {
@@ -61,6 +58,7 @@ const Myprofile = () => {
             toast.error('Failed to update profile picture.');
         }
     };
+    
     
 
     if(isProfileLoading || isImageUpdating){

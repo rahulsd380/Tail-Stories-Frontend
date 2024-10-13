@@ -3,7 +3,7 @@ import PostCard from "./PostCard";
 import { TPost } from "./posts.types";
 
 
-const Posts = ({posts}) => {
+const Posts = ({posts}:{posts:TPost[]}) => {
     return (
         <div className="">
             {

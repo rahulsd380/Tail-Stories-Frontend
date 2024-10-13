@@ -3,6 +3,8 @@ import img1 from "./assets/images/1.jpg";
 import img2 from "./assets/images/2.jpg";
 import img3 from "./assets/images/3.jpg";
 import authBgImage from "./assets/images/auth-bgImage.jpg";
+import aboutUsBgImage from "./assets/images/1.png";
+import aboutUsBgImage2 from "./assets/images/about-us-img1.jpg";
 
 
 // Importing icons
@@ -58,11 +60,19 @@ import edit from "./assets/icons/edit.svg";
 
 import cross from "./assets/icons/cross.svg";
 import user from "./assets/icons/user.svg";
+import price from "./assets/icons/price.svg";
+import phone from "./assets/icons/phone.svg";
+import email from "./assets/icons/email.svg";
+import location from "./assets/icons/location.svg";
 
 
 
 
 export const ICONS = {
+    phone,
+    email,
+    location,
+    price,
     user,
     cross,
     notificationGray,
@@ -117,5 +127,7 @@ export const IMAGES = {
     img1,
     img2,
     img3,
-    authBgImage
+    authBgImage,
+    aboutUsBgImage,
+    aboutUsBgImage2
 };

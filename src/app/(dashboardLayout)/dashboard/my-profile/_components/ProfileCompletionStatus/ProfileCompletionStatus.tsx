@@ -19,7 +19,7 @@ const ProfileCompletionStatus = () => {
             <h1 className="text-primary-10 font-Lato text-xl font-bold">Complete Your Profile</h1>
 
             <div className="mt-5">
-            <div className="relative w-[150px] h-[150px] mx-auto">
+            <div onClick={handleStartLoading} className="relative w-[150px] h-[150px] mx-auto">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
                     <circle
                         cx="50"

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useForm } from "react-hook-form";
 import Image from "next/image";
@@ -98,7 +99,7 @@ const Post = () => {
 
         formData.append("data", JSON.stringify(postData));
 
-        for(let image of imageFiles){
+        for(const image of imageFiles){
           formData.append("files", image)
         }
 

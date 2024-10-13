@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 import { RxCross2 } from "react-icons/rx";
 import { useForm } from "react-hook-form";
@@ -7,7 +8,7 @@ import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { useMakePaymentMutation } from "@/redux/features/Payment/paymentApi";
 import { useRouter } from "next/navigation";
-import { TUser } from "../../People/user.types";
+import { TUser } from "./Comments";
 
 
 type PaymentModalProps ={
@@ -35,7 +36,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({setOpenPaymentModal}) => {
 
       const handleMakePayment = async (data:TPaymentData) => {
         const paymentData = {
-          name: user.name,
+          name: data.name,
           email: data.email,
           phoneNumber: data.phoneNumber,
           userId: user.userId,

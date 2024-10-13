@@ -6,7 +6,7 @@ import React from "react";
 import { ICONS } from "../../../../../public";
 
 const Profile = () => {
-  const {data, isLoading:isProfileLoading} = useGetMeQuery({});
+  const {data} = useGetMeQuery({});
   console.log(data)
   const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
   return (

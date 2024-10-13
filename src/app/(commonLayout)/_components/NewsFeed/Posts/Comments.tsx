@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ICONS, IMAGES } from "../../../../../../public";
+import { ICONS } from "../../../../../../public";
 import CommentCard from "./CommentCard";
 import { useCommentOnPostMutation } from "@/redux/features/Posts/postsApi";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
@@ -34,19 +34,11 @@ const Comments: React.FC<TCommentsProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<TCommentData>();
 
   const user = useAppSelector(selectCurrentUser) as TUser | null;
 
   const [commentOnPost] = useCommentOnPostMutation();
-
-  const commentInfo = {
-    username: "Rahul",
-    profileImage: IMAGES.img1,
-    timeAgo: "12 mins ago",
-    comment: "kjhdf sdhfsd sidufhsd sioudf sdufsd uosidyfsd ouiysdf ",
-  };
 
   const handleComment = async (data: TCommentData) => {
     const commentData = {
