@@ -3,7 +3,7 @@ import LoginPage from "./_components/LoginPage";
 
 const Login = () => {
   return (
-    <div>
+    <div className="w-full">
       <LoginPage/>
     </div>
   );

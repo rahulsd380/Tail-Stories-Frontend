@@ -75,9 +75,33 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+
+    changeUserRoleToAdmin: builder.mutation({
+      query: (userId) => ({
+        url: `/users/make-admin/${userId}`,
+        method: 'PUT',
+      }),
+      invalidatesTags : ["users"]
+    }),
+
+  changeUserRoleToUser: builder.mutation({
+      query: (userId) => ({
+        url: `/users/make-user/${userId}`,
+        method: 'PUT',
+      }),
+      invalidatesTags : ["users"]
+    }),
+
+    deleteUser: builder.mutation({
+      query : (userId) => ({
+          url : `/users/delete-user/${userId}`,
+          method : "DELETE",
+      }),
+      invalidatesTags : ["users"]
+  }),
     
 
   }),
 });
 
-export const { useLoginMutation, useSignupMutation, useGetMeQuery, useUpdateProfileMutation, useGetmyPostsQuery, useGetUserByIdQuery, useFollowUserMutation, useUnfollowUserMutation, useGetAllUsersQuery } = authApi;
+export const { useLoginMutation, useSignupMutation, useGetMeQuery, useUpdateProfileMutation, useGetmyPostsQuery, useGetUserByIdQuery, useFollowUserMutation, useUnfollowUserMutation, useGetAllUsersQuery, useChangeUserRoleToAdminMutation, useChangeUserRoleToUserMutation, useDeleteUserMutation } = authApi;

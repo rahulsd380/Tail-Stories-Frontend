@@ -18,23 +18,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
-import { TUser } from "@/components/Home/People/user.types";
+import { TUser } from "@/components/Home/NewsFeed/Posts/Comments";
+import { usePathname } from 'next/navigation'
 
 const userLinks = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: <RxDashboard className="text-[1.3rem] text-gray-500" />,
+    icon: <RxDashboard className="text-[1.3rem]" />,
   },
   {
     title: "My Profile",
     href: "/dashboard/my-profile",
-    icon: <GoPerson className="text-[1.3rem] text-gray-500" />,
+    icon: <GoPerson className="text-[1.3rem]" />,
   },
   {
     title: "News Feed",
     href: "/",
-    icon: <IoNewspaperOutline className="text-[1.3rem] text-gray-500" />,
+    icon: <IoNewspaperOutline className="text-[1.3rem]" />,
   },
 ];
 
@@ -42,27 +43,27 @@ const adminLinks = [
   {
     title: "Contents",
     href: "/admin/contents",
-    icon: <MdContentPaste className="text-[1.3rem] text-gray-500" />,
+    icon: <MdContentPaste className="text-[1.3rem]" />,
   },
   {
     title: "Users",
-    href: "/admin/users",
-    icon: <FaUsers className="text-[1.3rem] text-gray-500" />,
+    href: "/dashboard/manage-users",
+    icon: <FaUsers className="text-[1.3rem]" />,
   },
   {
     title: "Payment History",
-    href: "/admin/payment-history",
-    icon: <MdOutlinePayment className="text-[1.3rem] text-gray-500" />,
+    href: "/dashboard/payment-history",
+    icon: <MdOutlinePayment className="text-[1.3rem]" />,
   },
   {
     title: "Create Post",
-    href: "/admin/create-post",
-    icon: <MdOutlinePostAdd className="text-[1.3rem] text-gray-500" />,
+    href: "/dashboard/create-post",
+    icon: <MdOutlinePostAdd className="text-[1.3rem]" />,
   },
   {
     title: "My Profile",
     href: "/dashboard/my-profile",
-    icon: <GoPerson className="text-[1.3rem] text-gray-500" />,
+    icon: <GoPerson className="text-[1.3rem]" />,
   },
 ];
 
@@ -87,6 +88,7 @@ const settingLinks = [
 ];
 
 const DashboardSidebar = () => {
+  const pathname = usePathname()
   const user = useAppSelector(selectCurrentUser) as TUser | null;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -127,7 +129,7 @@ const DashboardSidebar = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="flex justify-between items-center w-full hover:bg-gray-50 p-[5px] rounded-md cursor-pointer transition-all duration-200"
+                className={`${pathname === link.href ? "bg-primary-gradient text-white" : "bg-white hover:bg-gray-50 text-gray-500"} flex justify-between items-center w-full  p-[5px] rounded-md cursor-pointer transition-all duration-200`}
               >
                 <div className="flex items-center gap-[8px]">
                   {link.icon}
@@ -142,11 +144,11 @@ const DashboardSidebar = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="flex justify-between items-center w-full hover:bg-gray-50 p-[5px] rounded-md cursor-pointer transition-all duration-200"
+                className={`${pathname === link.href ? "bg-primary-gradient text-white" : "bg-white hover:bg-gray-50 text-gray-500"} flex justify-between items-center w-full  p-[5px] rounded-md cursor-pointer transition-all duration-200`}
               >
                 <div className="flex items-center gap-[8px]">
                   {link.icon}
-                  <p className="inline text-[1rem] font-[400] text-gray-500">
+                  <p className="inline text-[1rem] font-[400]">
                     {link.title}
                   </p>
                 </div>
@@ -155,7 +157,7 @@ const DashboardSidebar = () => {
           )}
 
           {/* dropdown for Social Engagement */}
-          {user!.role === "user" && (
+          {user && user!.role === "user" && (
             <div
               className={`${
                 isDropdownOpen && "bg-gray-50"
@@ -218,7 +220,7 @@ const DashboardSidebar = () => {
           ))}
 
           {/* dark mode toggle or logout button */}
-          {user!.role === "user" ? (
+          {user && user!.role === "user" ? (
             <div className="py-3 flex items-center mt-10">
               <div className="flex items-center bg-gray-200 p-[10px] rounded-md w-full justify-between relative">
                 <div

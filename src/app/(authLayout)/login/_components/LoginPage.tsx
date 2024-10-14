@@ -45,6 +45,8 @@ const LoginPage = () => {
     try {
       const response = await login(loginData).unwrap();
       const user = verifyToken(response.data?.accessToken);
+      console.log(user)
+
       dispatch(setUser({ user, token: response.data.accessToken }));
       toast.success("Logged in successfully.");
       router.push("/");
@@ -78,7 +80,7 @@ const LoginPage = () => {
               {...register("email", { required: "Email is required" })}
               type="text"
               id="email"
-              className="bg-primary-70 px-3 py-2 rounded-md border focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow flex-1 w-full pr-10"
+              className="bg-primary-70 px-3 py-2 rounded-md border focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow flex-1 w-full "
               placeholder="Enter your email"
             />
             {errors.email && (

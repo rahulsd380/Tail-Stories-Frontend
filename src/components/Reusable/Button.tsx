@@ -5,9 +5,10 @@ interface ButtonProps {
   children: ReactNode;
   variant: "primary" | "bordered";
   classNames?: string;
+  onClick?: () => Promise<void>
 }
 
-const Button: FC<ButtonProps> = ({ children, variant, classNames }) => {
+const Button: FC<ButtonProps> = ({ children, variant, classNames, onClick }) => {
   const baseClasses = "rounded-md transition-all duration-300";
 
   const variantClasses = {
@@ -22,7 +23,7 @@ const Button: FC<ButtonProps> = ({ children, variant, classNames }) => {
   );
 
   return (
-    <button className={finalClasses}>
+    <button onClick={onClick} className={finalClasses}>
       {children}
     </button>
   );

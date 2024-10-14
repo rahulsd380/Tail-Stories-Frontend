@@ -7,6 +7,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { TComment } from "./posts.types";
+
 export type TUser = {
   userId: string;
   email: string;

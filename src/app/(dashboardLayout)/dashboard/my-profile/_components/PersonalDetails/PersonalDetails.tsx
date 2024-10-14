@@ -13,6 +13,8 @@ type TDetails={
   name:string;
   email:string;
   phoneNumber:string;
+  occupation:string;
+  userName:string;
 }
 
 // type TPersonalDetailsProps = {
@@ -29,7 +31,7 @@ const PersonalDetails = ({details}:{details:TUser}) => {
 
     const [openProfileDetailsUpdate, setOpenProfileDetailsUpdate] = useState<boolean>(false);
    
-    const {name, email, phoneNumber} = details;
+    const {name, email, phoneNumber, occupation, userName} = details;
     const userInfo = [
         {
             title: "Full Name",
@@ -43,6 +45,14 @@ const PersonalDetails = ({details}:{details:TUser}) => {
             title: "Phone",
             value : phoneNumber? phoneNumber : "N/A"
         },
+        {
+            title: "Occupation",
+            value : occupation? occupation : "N/A"
+        },
+        {
+            title: "User Name",
+            value : userName? userName : "N/A"
+        },
     ];
 
     const handleUpdateDetails = async (data:TDetails) => {
@@ -50,7 +60,9 @@ const PersonalDetails = ({details}:{details:TUser}) => {
         const profileUpdatedData = {
             name : data.name,
             email : data.email,
-            phoneNumber : data.phoneNumber
+            phoneNumber : data.phoneNumber,
+            occupation : data.occupation,
+            userName : data.userName,
         };
         formData.append("data", JSON.stringify(profileUpdatedData));
 
@@ -82,7 +94,7 @@ const PersonalDetails = ({details}:{details:TUser}) => {
             </button>
            </div>
 
-           <div className="flex items-center gap-16 mt-4">
+           <div className="flex items-center justify-between mt-4">
             {
                 userInfo.map((info, index) => 
                     <div key={index} className="flex flex-col gap-1">
@@ -137,6 +149,24 @@ const PersonalDetails = ({details}:{details:TUser}) => {
         defaultValue={phoneNumber}
         placeholder="Enter your phone Number"
         register={register("phoneNumber", { required: "Phone Number is required" })}
+        error={errors.name}
+      />
+            <InputField
+        label="Occupation"
+        id="occupation"
+        type="text"
+        defaultValue={occupation}
+        placeholder="Enter your Occupation"
+        register={register("occupation", { required: "Occupation is required" })}
+        error={errors.name}
+      />
+            <InputField
+        label="User Name"
+        id="userName"
+        type="text"
+        defaultValue={userName}
+        placeholder="Enter your User Name"
+        register={register("userName", { required: "User Name is required" })}
         error={errors.name}
       />
 

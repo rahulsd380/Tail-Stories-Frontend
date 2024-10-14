@@ -20,7 +20,7 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
           />
           Tail Stories
         </Link>
-        <div className="flex items-center justify-center flex-1">
+        <div className="flex items-center justify-center flex-1 w-full">
           <ClientProvider>{children}</ClientProvider>
         </div>
       </div>

@@ -166,16 +166,14 @@ const CommentButton:React.FC<TCommentprops> = ({description,isVerified,contentTy
 
 
       <div className="flex items-center justify-between gap-4 w-full mt-5">
-      <button onClick={handleDownvote} className="w-full">
-      <Button variant="bordered" classNames="w-full">
+      {/* <button onClick={handleDownvote} className="w-full"> */}
+      <Button onClick={handleDownvote} variant="bordered" classNames="w-full">
             Downvote
         </Button>
-      </button>
-        <button onClick={handleUpvote} className="w-full">
-        <Button variant="primary" classNames="w-full">
+      {/* </button> */}
+        <Button onClick={handleUpvote} variant="primary" classNames="w-full">
             Upvote
         </Button>
-        </button>
         
       </div>
     </div>

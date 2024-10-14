@@ -8,7 +8,7 @@ type TAuthUser = {
 
 const initialState: TAuthUser = {
     user : null,
-    token : null
+    token : null,
 }
 const authSlice = createSlice({
     name : 'auth',

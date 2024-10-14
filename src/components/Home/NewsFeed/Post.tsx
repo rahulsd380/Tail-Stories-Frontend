@@ -6,13 +6,14 @@ import { ICONS } from "../../../../public";
 import Modal from "@/components/Modal/Modal";
 import InputField from "@/components/InputField/InputField";
 import SelectDropdown from '../../SelectDropdown/SelectDropdown';
-import JoditEditor from "jodit-react";
 import { useRef, useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
 import { useCreatePostMutation } from "@/redux/features/Posts/postsApi";
 import { toast } from 'sonner'
 import { TUser } from "./Posts/Comments";
+import dynamic from "next/dynamic";
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false, loading: () => <p>Loading...</p> });
 
 
 type TPostData = {
@@ -209,11 +210,11 @@ const Post = () => {
       >
         Content
       </label>
-                <JoditEditor
-            ref={editor}
-            value={content}
-            onChange={(newContent) => setContent(newContent)}
-          />
+      <JoditEditor
+  ref={editor}
+  value={content}
+  onChange={(newContent) => setContent(newContent)}
+/>
           {contentError && (
             <span className="text-warning-10 text-start">{contentError}</span>
           )}
@@ -250,7 +251,8 @@ const Post = () => {
               imagePreviews.length > 0 &&
               imagePreviews.map(previewUrl => 
                 <div key={previewUrl} className="p-2 rounded-md border">
-                  <img src={previewUrl} alt="image" className="h-full w-full object-cover object-center rounded-md" />
+                  <Image width={0}
+              height={0} src={previewUrl} alt="image" className="h-full w-full object-cover object-center rounded-md" />
                 </div>
               )
             }
