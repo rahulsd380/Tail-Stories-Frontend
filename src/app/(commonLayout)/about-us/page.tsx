@@ -1,13 +1,12 @@
-import ContactUs from '../contact-us/page';
-import AboutUsHero from './_components/AboutUsHero';
-import OurMission from './_components/OurMission';
+import AboutUsHero from "./_components/AboutUsHero/AboutUsHero";
+import OurVision from "./_components/OurVision/OurVision";
+
 
 const AboutUs = () => {
     return (
-        <div>
-            <AboutUsHero/>
-            <OurMission/>
-            <ContactUs/>
+        <div className="">
+        <AboutUsHero/>
+        <OurVision/>
         </div>
     );
 };

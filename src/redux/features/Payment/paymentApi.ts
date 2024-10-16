@@ -13,16 +13,16 @@ const paymentApi = baseApi.injectEndpoints({
       invalidatesTags: ["payments"]
     }),
 
-    getAllPaymentsHistory: builder.query({
+    getAllPaymentsHistories: builder.query({
       query: () => ({
         method: "GET",
-        url: "/posts",
+        url: "/payment",
       }),
-      providesTags : ["posts"]
+      providesTags : ["payments"]
     }),
     
 
   }),
 });
 
-export const {useGetAllPaymentsHistoryQuery, useMakePaymentMutation } = paymentApi;
+export const {useMakePaymentMutation, useGetAllPaymentsHistoriesQuery } = paymentApi;

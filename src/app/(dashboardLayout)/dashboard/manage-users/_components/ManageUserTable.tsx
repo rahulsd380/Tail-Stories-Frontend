@@ -22,9 +22,9 @@ const ManageUserTable = () => {
   }, []);
 
   const {data:users} = useGetAllUsersQuery({});
-  const [changeUserRoleToAdmin, { isLoading: ismakingAdmin }] =useChangeUserRoleToAdminMutation();
-  const [changeUserRoleToUser, { isLoading: isMakingUser }] =useChangeUserRoleToUserMutation();
-  const [deleteUser, { isLoading: isDeletingUser }] =useDeleteUserMutation();
+  const [changeUserRoleToAdmin] =useChangeUserRoleToAdminMutation();
+  const [changeUserRoleToUser] =useChangeUserRoleToUserMutation();
+  const [deleteUser] =useDeleteUserMutation();
 
   const handleMakeAdmin = async (userId: string) => {
     toast.promise(

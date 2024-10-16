@@ -3,8 +3,8 @@ import img1 from "./assets/images/1.jpg";
 import img2 from "./assets/images/2.jpg";
 import img3 from "./assets/images/3.jpg";
 import authBgImage from "./assets/images/auth-bgImage.jpg";
-import aboutUsBgImage from "./assets/images/1.png";
-import aboutUsBgImage2 from "./assets/images/about-us-img1.jpg";
+import team from "./assets/images/team.png";
+import vision from "./assets/images/vision.png";
 
 
 // Importing icons
@@ -128,6 +128,6 @@ export const IMAGES = {
     img2,
     img3,
     authBgImage,
-    aboutUsBgImage,
-    aboutUsBgImage2
+    team,
+    vision,
 };

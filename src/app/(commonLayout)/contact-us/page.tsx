@@ -1,9 +1,10 @@
+import ContactUsForm from "./_components/ContactUsForm";
 
 
 const ContactUs = () => {
     return (
         <div>
-            <h1>ContactUs</h1>
+            <ContactUsForm/>
         </div>
     );
 };
