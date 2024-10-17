@@ -99,9 +99,30 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags : ["users"]
   }),
+
+    forgetPassword: builder.mutation({
+      query : (email) => ({
+          url : `/auth/forget-password`,
+          method : "POST",
+          body: email,
+      }),
+      invalidatesTags : ["users"]
+  }),
+
+    resetPassword: builder.mutation({
+      query : ({token, resetPasswordData}) => ({
+          url : `/auth/reset-password`,
+          method : "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: resetPasswordData,
+      }),
+      invalidatesTags : ["users"]
+  }),
     
 
   }),
 });
 
-export const { useLoginMutation, useSignupMutation, useGetMeQuery, useUpdateProfileMutation, useGetmyPostsQuery, useGetUserByIdQuery, useFollowUserMutation, useUnfollowUserMutation, useGetAllUsersQuery, useChangeUserRoleToAdminMutation, useChangeUserRoleToUserMutation, useDeleteUserMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useGetMeQuery, useUpdateProfileMutation, useGetmyPostsQuery, useGetUserByIdQuery, useFollowUserMutation, useUnfollowUserMutation, useGetAllUsersQuery, useChangeUserRoleToAdminMutation, useChangeUserRoleToUserMutation, useDeleteUserMutation, useForgetPasswordMutation, useResetPasswordMutation } = authApi;

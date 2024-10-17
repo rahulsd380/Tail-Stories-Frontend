@@ -51,7 +51,7 @@ const LoginPage = () => {
       toast.success("Logged in successfully.");
       router.push("/");
     } catch (err) {
-      console.log(err);
+      toast.error(err?.data?.message);
     }
   };
 
@@ -99,8 +99,8 @@ const LoginPage = () => {
               {...register("password", {
                 required: "Password is required",
                 minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
+                  value: 6,
+                  message: "Password must be at least 6 characters",
                 },
               })}
               type={`${showPassword ? "text" : "password"}`}
@@ -149,9 +149,9 @@ const LoginPage = () => {
             </div>
 
             {/* Forgot password */}
-            <p className="text-primary-30 font-medium text-end mt-2 cursor-pointer hover:underline">
+            <Link href={"/forget-password"} className="text-primary-30 font-medium text-end mt-2 cursor-pointer hover:underline">
               Forgot Password?
-            </p>
+            </Link>
           </div>
 
           <Button variant="primary">
