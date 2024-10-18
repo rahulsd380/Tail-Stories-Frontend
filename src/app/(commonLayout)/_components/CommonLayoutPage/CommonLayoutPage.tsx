@@ -9,6 +9,7 @@ import { TPost } from '../../../../components/Home/NewsFeed/Posts/posts.types';
 import { useGetAllPostsQuery } from '@/redux/features/Posts/postsApi';
 
 const CommonLayoutPage = () => {
+  
     const { data: allPosts } = useGetAllPostsQuery({});
   
   // State to manage selected category

@@ -16,11 +16,10 @@ const authApi = baseApi.injectEndpoints({
     getAllPosts: builder.query({
       query: () => ({
         method: "GET",
-        url: "/posts",
+        url: `/posts`,
       }),
-      providesTags : ["posts"]
+      providesTags: ["posts"],
     }),
-
     getSinglePostById: builder.query({
       query: (postId) => ({
         method: "GET",
@@ -30,9 +29,9 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     updatePost: builder.mutation({
-      query: ({id, updatedPostData}) => ({
+      query: ({postId, updatedPostData}) => ({
         method: "PUT",
-        url: `/posts/${id}`,
+        url: `/posts/${postId}`,
         body: updatedPostData,
       }),
       invalidatesTags: ["posts"]
@@ -51,7 +50,7 @@ const authApi = baseApi.injectEndpoints({
     deletePost: builder.mutation({
         query: (id) => ({
           method: "DELETE",
-          url: `/posts/${id}`,
+          url: `/posts/delete-post/${id}`,
         }),
         invalidatesTags : ["posts"]
       }),

@@ -7,16 +7,23 @@ import CommentButton from "./CommentButton";
 import PostDescription from "./PostDescription";
 import PostImages from "./PostImages";
 import { TPost } from "./posts.types";
-import { useGetMeQuery } from "@/redux/features/Auth/authApi";
+import { useGetMeQuery, useGetUserByIdQuery } from "@/redux/features/Auth/authApi";
 import { useUpvotePostMutation } from "@/redux/features/Posts/postsApi";
 import Modal from "@/components/Modal/Modal";
 import { useState } from "react";
 import PaymentModal from "./PaymentModal";
+import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { TUser } from "./Comments";
+
+
 
 const PostCard = ({ post }: { post: TPost }) => {
+  const user = useAppSelector(selectCurrentUser) as TUser | null;
   const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);
   const [upvotePost] = useUpvotePostMutation();
   const { data } = useGetMeQuery({});
+  const {data:userById} = useGetUserByIdQuery(post?.authorId);
   const isVerified = data?.data?.isVerified;
   const contentType = post?.contentType;
 
@@ -33,7 +40,7 @@ const PostCard = ({ post }: { post: TPost }) => {
     }
   };
   return (
-    <div className="bg-[#F6F7F8] p-4 border rounded-xl font-Lato flex flex-col gap-4 mt-4">
+    <div className="bg-[#F6F7F8] p-4 border rounded-xl font-Lato flex flex-col gap-4 mb-4">
       <div className="flex gap-4">
         <div className="size-10 rounded-full bg-primary-20"></div>
         {/* Profile / header */}
@@ -59,7 +66,12 @@ const PostCard = ({ post }: { post: TPost }) => {
                 />
               )}
             </div>
-            <PostDropdown />
+            {
+            user?.userId === userById?.data?._id ?
+            <PostDropdown post={post} postId={post?._id} />
+            :
+            ""
+            }
           </div>
           <p className="text-sm text-primary-10/50">1 hr ago</p>
         </div>

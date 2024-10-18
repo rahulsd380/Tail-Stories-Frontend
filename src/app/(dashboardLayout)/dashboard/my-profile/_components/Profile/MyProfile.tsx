@@ -16,36 +16,26 @@ import ProfileCompletionStatus from '../ProfileCompletionStatus/ProfileCompletio
 const MyProfile2 = () => {
     const {data, isLoading:isProfileLoading} = useGetMeQuery({});
     const [updateProfile, {isLoading:isImageUpdating}] = useUpdateProfileMutation();
-    const [imageFile, setImageFile] = useState<File | null>(null)
-    console.log(imageFile)
+    const [imageFile, setImageFile] = useState<File | null>()
   const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
     const [profileTab, setProfileTab] = useState("Personal Details");
     const profileTabButtons = ["Personal Details", "Posts", "My Followers", "Followings"];
 
-
-    
-    
-
-    
-
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
-        if (file) {
-            setImageFile(file);
-            await uploadProfileImage();
-
-        }
+        console.log(file)
+           if(file){
+            // setImageFile(file);
+            await uploadProfileImage(file as File);
+           }
     };
     
-    const uploadProfileImage = async () => {
+    const uploadProfileImage = async (file: File) => {
         const formData = new FormData();
-    
-        if (imageFile) {
-            formData.append("file", imageFile);
-        } else {
-            console.log("No image file found to upload.");
-            return;
-        }
+        
+        formData.append("file", file);
+
+        console.log(formData.get("file"))
     
         try {
             const response = await updateProfile(formData).unwrap();
@@ -58,7 +48,6 @@ const MyProfile2 = () => {
             toast.error('Failed to update profile picture.');
         }
     };
-    
     
 
     if(isProfileLoading || isImageUpdating){

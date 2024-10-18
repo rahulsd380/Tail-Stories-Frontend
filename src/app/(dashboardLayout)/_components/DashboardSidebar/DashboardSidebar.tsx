@@ -133,7 +133,7 @@ const DashboardSidebar = () => {
               >
                 <div className="flex items-center gap-[8px]">
                   {link.icon}
-                  <p className="inline text-[1rem] font-[400] text-gray-500">
+                  <p className="inline text-[1rem] font-[400] ">
                     {link.title}
                   </p>
                 </div>

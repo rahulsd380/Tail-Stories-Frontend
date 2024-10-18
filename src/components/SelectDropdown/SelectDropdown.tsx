@@ -8,6 +8,7 @@ interface SelectDropdownProps {
   register: UseFormRegisterReturn;
   error?: FieldError;
   placeholder?: string;
+  defaultValue?: string;
 }
 
 const SelectDropdown: FC<SelectDropdownProps> = ({
@@ -17,6 +18,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
   register,
   error,
   placeholder,
+  defaultValue,
 }) => {
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -29,6 +31,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
       <select
         {...register}
         id={id}
+        defaultValue={defaultValue}
         className={`bg-primary-70 px-3 py-[10px] rounded-md border focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow flex-1 w-full pr-10 ${
           error ? 'border-rose-500' : ''
         }`}

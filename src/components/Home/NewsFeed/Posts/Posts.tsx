@@ -4,6 +4,7 @@ import { TPost } from "./posts.types";
 
 
 const Posts = ({posts}:{posts:TPost[]}) => {
+    console.log(posts)
     return (
         <div className="">
             {
