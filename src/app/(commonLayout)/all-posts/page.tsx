@@ -5,11 +5,8 @@ import { useGetAllPostsQuery } from '@/redux/features/Posts/postsApi';
 import { useState, useEffect } from 'react';
 import Posts from './../../../components/Home/NewsFeed/Posts/Posts';
 import { TPost } from '@/components/Home/NewsFeed/Posts/posts.types';
-import Button from '@/components/Reusable/Button';
-import { useRouter } from "next/navigation";
 
 export default function AllPosts() {
-  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const { data: allPosts } = useGetAllPostsQuery({});
   

@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState } from 'react';
 import { useGetMeQuery, useGetmyPostsQuery, useUpdateProfileMutation } from '@/redux/features/Auth/authApi';
 import { toast } from 'sonner'
@@ -16,28 +15,19 @@ import ProfileCompletionStatus from '../ProfileCompletionStatus/ProfileCompletio
 const MyProfile2 = () => {
     const {data, isLoading:isProfileLoading} = useGetMeQuery({});
     const [updateProfile, {isLoading:isImageUpdating}] = useUpdateProfileMutation();
-    const [imageFile, setImageFile] = useState<File | null>()
-  const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
+    const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
     const [profileTab, setProfileTab] = useState("Personal Details");
     const profileTabButtons = ["Personal Details", "Posts", "My Followers", "Followings"];
 
-    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files ? e.target.files[0] : null;
+    const handleFileChange = async (event: any) => {
+        const file = event.target.files[0];
         console.log(file)
-           if(file){
-            // setImageFile(file);
-            await uploadProfileImage(file as File);
-           }
-    };
-    
-    const uploadProfileImage = async (file: File) => {
-        const formData = new FormData();
-        
-        formData.append("file", file);
-
-        console.log(formData.get("file"))
+        if (file) {
+          const formData = new FormData();
     
         try {
+            formData.append("file", file);
+            console.log(formData.get("file"))
             const response = await updateProfile(formData).unwrap();
             console.log(response);
             if (response.success) {
@@ -47,7 +37,27 @@ const MyProfile2 = () => {
             console.error(err);
             toast.error('Failed to update profile picture.');
         }
-    };
+        } else {
+          console.log("no file section");
+        }
+      };
+
+    // const uploadProfileImage = async (file: File) => {
+    //     const formData = new FormData();
+    
+    //     try {
+    //         formData.append("file", file);
+    //         console.log(formData.get("file"))
+    //         const response = await updateProfile(formData).unwrap();
+    //         console.log(response);
+    //         if (response.success) {
+    //             toast.success('Profile picture updated successfully.');
+    //         }
+    //     } catch (err) {
+    //         console.error(err);
+    //         toast.error('Failed to update profile picture.');
+    //     }
+    // };
     
 
     if(isProfileLoading || isImageUpdating){
@@ -83,7 +93,7 @@ const MyProfile2 = () => {
                 <div>
                     <div>
                     <label htmlFor="image" className="text-gray-500 font-medium bg-white rounded-xl border px-3 py-[7px] hover:shadow transition duration-300 cursor-pointer">Upload new photo</label>
-                    <input onChange={(e) => handleImageChange(e)} type="file" id="image" className="hidden" />
+                    <input onChange={(e) => handleFileChange(e)} type="file" id="image" className="hidden" />
 
                         </div>
                     <p className="text-primary-80 text-sm mt-3">At least 800 x 800 px recomended.</p>
