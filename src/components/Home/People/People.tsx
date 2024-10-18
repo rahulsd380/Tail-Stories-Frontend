@@ -8,7 +8,7 @@ const People = () => {
   console.log(allUsers)
 
   return (
-    <div className="rounded-xl bg-[#F6F7F8] p-4 border dark:bg-[#18181B] font-Lato">
+    <div className="rounded-xl bg-[#F6F7F8] p-4 border font-Lato">
      <div className="border-b pb-2 mb-4">
         <h1 className="text-lg">People You May Know</h1>
       </div>

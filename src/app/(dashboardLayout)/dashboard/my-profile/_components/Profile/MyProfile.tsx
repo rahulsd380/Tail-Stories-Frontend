@@ -21,48 +21,23 @@ const MyProfile2 = () => {
 
     const handleFileChange = async (event: any) => {
         const file = event.target.files[0];
-        console.log(file)
         if (file) {
-          const formData = new FormData();
-    
-        try {
+            const formData = new FormData();
             formData.append("file", file);
-            console.log(formData.get("file"))
-            const response = await updateProfile(formData).unwrap();
-            console.log(response);
-            if (response.success) {
-                toast.success('Profile picture updated successfully.');
-            }
-        } catch (err) {
-            console.error(err);
-            toast.error('Failed to update profile picture.');
-        }
+
+            toast.promise(
+                updateProfile(formData).unwrap(),
+                {
+                    loading: 'Updating profile picture...',
+                    success: 'Profile picture updated successfully!',
+                    error: 'Failed to update profile picture.',
+                }
+            );
         } else {
-          console.log("no file section");
+            console.log("No file selected");
         }
-      };
+    };
 
-    // const uploadProfileImage = async (file: File) => {
-    //     const formData = new FormData();
-    
-    //     try {
-    //         formData.append("file", file);
-    //         console.log(formData.get("file"))
-    //         const response = await updateProfile(formData).unwrap();
-    //         console.log(response);
-    //         if (response.success) {
-    //             toast.success('Profile picture updated successfully.');
-    //         }
-    //     } catch (err) {
-    //         console.error(err);
-    //         toast.error('Failed to update profile picture.');
-    //     }
-    // };
-    
-
-    if(isProfileLoading || isImageUpdating){
-        return <p>Loading</p>
-    }
     return (
         <div className="font-Lato">
             <h1 className="text-primary-10 font-Lato text-3xl font-bold mb-5">My Profile</h1>
@@ -70,7 +45,12 @@ const MyProfile2 = () => {
             <div className="bg-white border rounded-3xl p-7 w-full h-fit">
                 <div className="border-b pb-4 flex gap-5 items-center">
                     {/* Profile photo */}
-                <div className="size-28 rounded-full bg-primary-20 flex items-center justify-center">
+                {
+                    isProfileLoading? 
+                    <div className="size-28 rounded-full bg-gray-50 animate-pulse flex items-center justify-center">
+                    </div>
+                    :
+                    <div className="size-28 rounded-full bg-primary-20 flex items-center justify-center">
                 {
           data?.data?.profilePicture ?
           <Image
@@ -90,6 +70,8 @@ const MyProfile2 = () => {
         />
         }
                 </div>
+                }
+
                 <div>
                     <div>
                     <label htmlFor="image" className="text-gray-500 font-medium bg-white rounded-xl border px-3 py-[7px] hover:shadow transition duration-300 cursor-pointer">Upload new photo</label>

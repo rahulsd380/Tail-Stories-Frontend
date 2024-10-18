@@ -31,7 +31,7 @@ const PersonalDetails = ({details}:{details:TUser}) => {
 
     const [openProfileDetailsUpdate, setOpenProfileDetailsUpdate] = useState<boolean>(false);
    
-    const {name, email, phoneNumber, occupation, userName} = details;
+    const {name, email, phoneNumber, occupation, userName} = details || {};
     const userInfo = [
         {
             title: "Full Name",
@@ -71,6 +71,7 @@ const PersonalDetails = ({details}:{details:TUser}) => {
             console.log(response);
           if(response.success) {
             toast.success('Profile updated successfully.');
+            setOpenProfileDetailsUpdate(false);
           }
           }catch(err){
             console.log(err)

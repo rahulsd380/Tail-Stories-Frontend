@@ -23,7 +23,8 @@ const PostCard = ({ post }: { post: TPost }) => {
   const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);
   const [upvotePost] = useUpvotePostMutation();
   const { data } = useGetMeQuery({});
-  const {data:userById} = useGetUserByIdQuery(post?.authorId);
+  const {data:userById} = useGetUserByIdQuery(post?.authorId)
+  console.log(userById?.data?.name)
   const isVerified = data?.data?.isVerified;
   const contentType = post?.contentType;
 
@@ -39,15 +40,35 @@ const PostCard = ({ post }: { post: TPost }) => {
       console.log(err);
     }
   };
+
   return (
     <div className="bg-[#F6F7F8] p-4 border rounded-xl font-Lato flex flex-col gap-4 mb-4">
       <div className="flex gap-4">
-        <div className="size-10 rounded-full bg-primary-20"></div>
+        <div className="size-10 rounded-full bg-white border flex items-center justify-center">
+        {
+          userById?.data?.profilePicture ?
+          <Image
+          width={40}
+          height={40}
+        className="size-10 rounded-full object-cover"
+          src={data?.data?.profilePicture}
+          alt=""
+        />
+        :
+        <Image
+          width={32}
+          height={32}
+          className="size-8 rounded-full object-cover"
+          src={ICONS.user}
+          alt=""
+        />
+        }
+        </div>
         {/* Profile / header */}
         <div className="w-full flex-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <h1 className="font-semibold text-primary-10">Rahul Sutradhar</h1>
+              <h1 className="font-semibold text-primary-10">{userById?.data?.name}</h1>
 
               {isVerified && (
                 <Image

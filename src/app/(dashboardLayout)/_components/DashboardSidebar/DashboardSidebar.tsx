@@ -12,6 +12,7 @@ import { GoPerson } from "react-icons/go";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { MdContentPaste, MdOutlinePayment, MdOutlinePostAdd } from "react-icons/md";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { IMAGES } from "../../../../../public";
 import Image from "next/image";
@@ -41,9 +42,9 @@ const userLinks = [
 
 const adminLinks = [
   {
-    title: "Contents",
-    href: "/admin/contents",
-    icon: <MdContentPaste className="text-[1.3rem]" />,
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: <MdOutlineDashboardCustomize className="text-[1.3rem]" />,
   },
   {
     title: "Users",

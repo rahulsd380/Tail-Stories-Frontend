@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="font-Lato flex items-center justify-between py-4">
         <div className="flex items-center gap-6">
           <Link href={"/"}
-            className="flex items-center gap-2 text-2xl font-bold text-primary-30 dark:text-primary-40"
+            className="flex items-center gap-2 text-2xl font-bold text-primary-30 "
           >
             <Image
               src={IMAGES.tailStoriesLogo}

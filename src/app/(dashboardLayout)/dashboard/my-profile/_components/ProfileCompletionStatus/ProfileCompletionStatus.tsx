@@ -1,5 +1,7 @@
 'use client'
 import React, { useState } from 'react';
+import { TiTick } from "react-icons/ti";
+
 
 const ProfileCompletionStatus = () => {
     const [progress, setProgress] = useState(0);
@@ -14,6 +16,15 @@ const ProfileCompletionStatus = () => {
         setProgress(0);
         setIsLoading(true);
     };
+
+    const profileCompletionStatus=[
+       "Upload Profile Picture",
+       "Update Personal Details",
+        "Add Bio",
+        "Add Location",
+        "Use Secure Password",
+        "Update Notification Settings",
+    ]
     return (
         <div className="font-Lato bg-white border rounded-3xl p-7 w-full h-fit max-w-[300px]">
             <h1 className="text-primary-10 font-Lato text-xl font-bold">Complete Your Profile</h1>
@@ -70,6 +81,18 @@ const ProfileCompletionStatus = () => {
             </div>
 
             
+        </div>
+
+        <div className="flex flex-col gap-3 mt-5">
+            {
+                profileCompletionStatus.map(status => 
+                    <div className="flex items-center gap-3">
+        <TiTick className="text-xl text-green-600"/>
+        <p className="text-primary-80 text-sm">{status}</p>
+        </div>
+                )
+            }
+        
         </div>
         </div>
     );

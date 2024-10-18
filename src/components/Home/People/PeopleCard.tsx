@@ -13,7 +13,6 @@ const PeopleCard = ({ user }:{user:TUser}) => {
   const [followUser] = useFollowUserMutation();
   const [unfollowUser] = useUnfollowUserMutation();
 
-  // Check if the user is already followed by the current user
   useEffect(() => {
     if (data?.data?.followings?.includes(user?._id)) {
       setIsFollowing(true);
@@ -27,7 +26,7 @@ const PeopleCard = ({ user }:{user:TUser}) => {
     try {
       const response = await followUser(userId);
       console.log(response);
-      setIsFollowing(true); // Set the state to true after following
+      setIsFollowing(true);
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +37,7 @@ const PeopleCard = ({ user }:{user:TUser}) => {
     try {
       const response = await unfollowUser(userId);
       console.log(response);
-      setIsFollowing(false); // Set the state to false after unfollowing
+      setIsFollowing(false);
     } catch (err) {
       console.log(err);
     }

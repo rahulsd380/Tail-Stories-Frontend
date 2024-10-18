@@ -50,7 +50,7 @@ const LoginPage = () => {
       dispatch(setUser({ user, token: response.data.accessToken }));
       toast.success("Logged in successfully.");
       router.push("/");
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err?.data?.message);
     }
   };

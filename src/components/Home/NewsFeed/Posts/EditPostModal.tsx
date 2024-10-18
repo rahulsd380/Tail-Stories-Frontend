@@ -16,7 +16,9 @@ import { toast } from "sonner";
 import { TPost } from "./posts.types";
 
 type TPostModalTypes = {
-  setOpenEditPostModal?: (openEditPostModal: boolean) => void;
+  setOpenEditPostModal:
+    | ((openEditPostModal: boolean) => void | undefined)
+    | undefined;
   post: TPost;
 };
 
@@ -39,7 +41,9 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
   } = useForm<TPostData>();
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
 
-  const [imagePreviews, setImagePreviews] = useState<string[] | []>(post?.images);
+  const [imagePreviews, setImagePreviews] = useState<string[] | []>(
+    post?.images as string[]
+  );
 
   const [updatePost, { isLoading: isCreatingPost }] = useUpdatePostMutation();
   const editor = useRef(null);
@@ -55,22 +59,20 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
     } else {
       setContentError("");
     }
-  }, [content])
-
+  }, [content]);
 
   const handleRemoveImage = (index: number) => {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-
   // Handle image upload
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    
+
     if (file) {
       setImageFiles((prev) => [...prev, file]);
-  
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreviews((prev) => [...prev, reader.result as string]);
@@ -79,31 +81,35 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
     }
   };
 
-
   const handleEditPost = async (data: TPostData) => {
     const formData = new FormData();
-  
+
     const updatedPostData = {
       title: data.title,
       body: content,
       category: data.category,
       contentType: data.contentType,
     };
-  
-    formData.append("data", JSON.stringify(updatedPostData));
-  
-    for(const image of imageFiles){
-        formData.append("files", image)
-      }
 
-      console.log(formData.get("data"));
-      console.log(formData.get("files"));
-  
+    formData.append("data", JSON.stringify(updatedPostData));
+
+    for (const image of imageFiles) {
+      formData.append("files", image);
+    }
+
+    console.log(formData.get("data"));
+    console.log(formData.get("files"));
+
     try {
-      const response = await updatePost({ postId: post?._id, formData }).unwrap();
+      const response = await updatePost({
+        postId: post?._id,
+        formData,
+      }).unwrap();
       if (response.success) {
         toast.success("Post updated successfully.");
-        setOpenEditPostModal?.(false);
+        if (setOpenEditPostModal) {
+          setOpenEditPostModal(false);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -119,7 +125,11 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
         </h1>
 
         <Image
-          onClick={() => setOpenEditPostModal(false)}
+          onClick={() => {
+            if (setOpenEditPostModal) {
+              setOpenEditPostModal(false);
+            }
+          }}
           src={ICONS.cross}
           width={25}
           height={25}
@@ -151,7 +161,9 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
               { value: "Tip", label: "Tip" },
               { value: "Story", label: "Story" },
             ]}
-            register={register("category", { required: "Category is required" })}
+            register={register("category", {
+              required: "Category is required",
+            })}
             error={errors.category}
           />
           <SelectDropdown
@@ -182,7 +194,10 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
 
         <div className="bg-white border rounded-md p-3 w-full flex items-center justify-between">
           <div className="cursor-pointer">
-            <label htmlFor="images" className="flex flex-col gap-1 cursor-pointer">
+            <label
+              htmlFor="images"
+              className="flex flex-col gap-1 cursor-pointer"
+            >
               <div className="flex items-center gap-3">
                 <Image
                   src={ICONS.photo}
@@ -204,7 +219,10 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
               className="hidden"
             />
           </div>
-          <button type="submit" className="bg-primary-gradient text-white px-3 py-3 rounded-md">
+          <button
+            type="submit"
+            className="bg-primary-gradient text-white px-3 py-3 rounded-md"
+          >
             {isCreatingPost ? "Updating..." : "Update Post"}
           </button>
         </div>
@@ -222,7 +240,7 @@ const EditPostModal: React.FC<TPostModalTypes> = ({
                   className="h-full w-full object-cover object-center rounded-md"
                 />
                 <Image
-                onClick={() => handleRemoveImage(index)}
+                  onClick={() => handleRemoveImage(index)}
                   src={ICONS.cross}
                   alt="remove-image"
                   className="absolute top-3 right-3 cursor-pointer"

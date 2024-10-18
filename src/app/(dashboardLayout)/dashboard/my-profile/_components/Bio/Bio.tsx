@@ -35,6 +35,7 @@ const Bio = ({bio} : {bio:string}) => {
       console.log(response);
       if (response.success) {
         toast.success('Bio updated successfully.');
+        setOpenProfileDetailsUpdate(false);
       }
     } catch (err) {
       console.log(err);

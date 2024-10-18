@@ -40,7 +40,7 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
         url: `/users/${userId}`,
       }),
-      // invalidatesTags: ["users"]
+      providesTags: ["users"]
     }),
 
     getmyPosts: builder.query({

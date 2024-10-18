@@ -9,7 +9,7 @@ const Profile = () => {
   console.log(data)
   const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
   return (
-    <div className="flex w-full flex-col items-center justify-center space-y-4 rounded-xl bg-[#F6F7F8] p-4 border dark:bg-[#18181B] font-Lato">
+    <div className="flex w-full flex-col items-center justify-center space-y-4 rounded-xl bg-[#F6F7F8] p-4 border font-Lato">
       <div className="group relative size-[110px] rounded-full">
         {
           data?.data?.profilePicture ?
@@ -29,14 +29,14 @@ const Profile = () => {
           alt="card navigate ui"
         />
         }
-        <span className="absolute bottom-3 right-0 h-5 w-5 rounded-full border-[3px] border-white bg-green-500 dark:border-[#18181B]"></span>
+        <span className="absolute bottom-3 right-0 h-5 w-5 rounded-full border-[3px] border-white bg-green-500 "></span>
         <span className="absolute bottom-3 right-0 h-5 w-5 animate-ping rounded-full bg-green-500"></span>
       </div>
      { 
      data?.data &&
       <div className="space-y-1 text-center">
         
-        <h1 className="text-lg xl:text-2xl text-gray-700 dark:text-white/90">{data?.data?.name}</h1>
+        <h1 className="text-lg xl:text-2xl text-gray-700 ">{data?.data?.name}</h1>
         <p className="text-sm text-gray-400">{data?.data?.userName}</p>
         {/* bio  */}
       <p className="pb-2 text-center text-sm text-gray-500 mt-2 max-w-[240px] mx-auto">
@@ -45,19 +45,19 @@ const Profile = () => {
       </div>}
       <div className="flex gap-10 items-center justify-center border-y w-full py-2">
         <div className="space-y-1 text-center">
-          <p className="text-xl font-semibold dark:text-white/50">
+          <p className="text-xl font-semibold ">
             {myPosts?.data?.length ? myPosts?.data?.length : 0}
           </p>
-          <p className="text-gray-500 dark:text-white/70 text-sm">Posts</p>
+          <p className="text-gray-500  text-sm">Posts</p>
         </div>
 
         <div className="bg-primary-30 h-10 w-0.5"></div>
 
         <div className="space-y-1 text-center ">
-          <p className="text-xl font-semibold dark:text-white/50">
-            {data?.data?.followers?.length}
+          <p className="text-xl font-semibold ">
+            {data?.data?.followers?.length ?data?.data?.followers?.length : 0}
           </p>
-          <p className="text-gray-500 dark:text-white/70 text-sm">Followers</p>
+          <p className="text-gray-500  text-sm">Followers</p>
         </div>
       </div>
       

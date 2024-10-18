@@ -5,6 +5,7 @@ import { MdOutlineChangeCircle } from "react-icons/md";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { useChangeUserRoleToAdminMutation, useChangeUserRoleToUserMutation, useGetAllUsersQuery, useDeleteUserMutation } from '@/redux/features/Auth/authApi';
 import { toast } from "sonner";
+import { TUser } from '@/components/Home/People/user.types';
 
 const ManageUserTable = () => {
   // Dropdown state
@@ -77,7 +78,7 @@ const ManageUserTable = () => {
         </thead>
         {/* Table body */}
         <tbody>
-          {users?.data?.map((user, idx) => (
+          {users?.data?.map((user:TUser, idx:number) => (
             <tr key={user?._id} className="border-b bg-gray-50">
               <td className="py-3 px-4">{user.name}</td>
               <td className="py-3 px-4">{user.userName}</td>
