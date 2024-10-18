@@ -2,18 +2,30 @@
 import Filter from '@/components/Home/Filter/Filter';
 import Container from './../../../components/Container/Container';
 import { useGetAllPostsQuery } from '@/redux/features/Posts/postsApi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Posts from './../../../components/Home/NewsFeed/Posts/Posts';
 import { TPost } from '@/components/Home/NewsFeed/Posts/posts.types';
 import Button from '@/components/Reusable/Button';
+import { useRouter } from "next/navigation";
 
 export default function AllPosts() {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
   const { data: allPosts } = useGetAllPostsQuery({});
   
   // State to manage selected category
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedContentType, setSelectedContentType] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Effect to handle the query parameter from the URL
+  useEffect(() => {
+    const { search } = window.location;
+    const params = new URLSearchParams(search);
+    const query = params.get('search');
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, []);
 
   // Filter posts based on selected category and search query
   const filteredPosts = allPosts?.data?.filter((post: TPost) => {
@@ -23,12 +35,12 @@ export default function AllPosts() {
     
     return categoryMatch && contentTypeMatch && searchMatch;
   });
-  
+
   return (
-    <div className="mt-10">
+    <div className="mt-10 h-[calc(100vh-40px)]">
       <Container>
         <div className="flex flex-col md:flex-row gap-10 w-full">
-          <div className="w-full md:w-[30%]">
+          <div className="w-full md:w-[30%] h-fit overflow-y-auto scrollbar-hide">
             <Filter
               setSelectedCategory={setSelectedCategory} 
               selectedCategory={selectedCategory} 
@@ -37,7 +49,7 @@ export default function AllPosts() {
             />
           </div>
 
-          <div className="w-full md:w-[70%]">
+          <div className="w-full md:w-[70%] overflow-y-auto h-screen scrollbar-hide">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-0">
               <h1 className="font-semibold text-2xl text-primary-10">All Posts</h1>
               <div className="flex justify-end gap-5 w-full md:w-fit">
@@ -48,9 +60,9 @@ export default function AllPosts() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="bg-primary-70 px-3 py-[10px] rounded-lg border border-primary-30 focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow w-full md:w-[280px] lg:w-[400px]"
                 />
-                <Button variant="primary">
+                <button className="px-4 py-3 bg-primary-gradient text-white hover:opacity-90 rounded-md transition-all duration-300">
                   Search
-                </Button>
+                </button>
               </div>
             </div>
 

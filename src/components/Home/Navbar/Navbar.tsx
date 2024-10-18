@@ -9,8 +9,19 @@ import HamburgerMenu from "./HamburgerMenu";
 import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
+import { useRouter } from "next/navigation";
+import { FiSearch } from "react-icons/fi";
+
+
 
 const Navbar = () => {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    router.push(`/all-posts?search=${encodeURIComponent(searchQuery)}`);
+  };
+
   const [isMounted, setIsMounted] = useState(false);
   const user = useAppSelector(selectCurrentUser);
 
@@ -23,12 +34,13 @@ const Navbar = () => {
     // Optionally, you can return null or a loading skeleton here
     return null;
   }
+
+
   return (
     <Container>
       <div className="font-Lato flex items-center justify-between py-4">
         <div className="flex items-center gap-6">
-          <Link
-            href={"/"}
+          <Link href={"/"}
             className="flex items-center gap-2 text-2xl font-bold text-primary-30 dark:text-primary-40"
           >
             <Image
@@ -40,11 +52,17 @@ const Navbar = () => {
             Tail Stories
           </Link>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:block relative">
             <input
+            onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Find post"
               type="text"
               className="bg-primary-70 px-3 py-[10px] rounded-lg border border-primary-30 focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow"
+            />
+           <FiSearch
+              onClick={handleSearch}
+              className="absolute top-1/2 right-3 transform -translate-y-1/2 text-primary-30 cursor-pointer"
+              size={20}
             />
           </div>
         </div>
