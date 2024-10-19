@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 // postcard
@@ -13,7 +14,7 @@ import Button from "@/components/Reusable/Button";
 import Link from "next/link";
 import { useLoginMutation } from "@/redux/features/Auth/authApi";
 import { useAppDispatch } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/features/Auth/authSlice";
 import { verifyToken } from "@/utils/verifyToken";
 import { toast } from "sonner";
@@ -24,9 +25,42 @@ type TLoginData = {
   password: string;
 };
 
+// type TAuthResponse ={
+//   success: boolean;
+//   message: string;
+//   data: {
+//     accessToken: string;
+//     refreshToken: string;
+//     user: {
+//       _id: string;
+//       name: string;
+//       email: string;
+//       role: string;
+//     };
+//   };
+// }
+
+// interface ErrorResponse {
+//   error: {
+//     data: {
+//       errorSourse: {
+//         message: string;
+//         stack: string;
+//         success: boolean;
+//       };
+//       status: number;
+//     };
+//   };
+//   meta: {
+//     request: Request;
+//     response: Response;
+//   };
+// }
+
+
 const LoginPage = () => {
   const [login, { isLoading: isLoginIn }] = useLoginMutation();
-  const router = useRouter();
+  // const router = useRouter();
 
   const dispatch = useAppDispatch();
   const {
@@ -45,15 +79,18 @@ const LoginPage = () => {
     try {
       const response = await login(loginData).unwrap();
       const user = verifyToken(response.data?.accessToken);
-      console.log(user)
+      console.log(response)
 
       dispatch(setUser({ user, token: response.data.accessToken }));
       toast.success("Logged in successfully.");
-      router.push("/");
+      // router.push("/");
     } catch (err:any) {
       toast.error(err?.data?.message);
     }
   };
+
+
+  
 
   return (
     <div className="w-full">

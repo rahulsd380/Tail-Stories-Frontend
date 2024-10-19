@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { IoIosArrowDown, IoIosSearch } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import {
   IoMoonOutline,
   IoNewspaperOutline,

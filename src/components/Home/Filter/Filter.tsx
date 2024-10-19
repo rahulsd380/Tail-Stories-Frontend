@@ -7,8 +7,8 @@ type TFilter = {
   setSelectedCategory: (category: string | null) => void;
   selectedContentType: string | null;
   setSelectedContentType: (category: string | null) => void;
-  selectedSortOption: string | null; 
-  setSelectedSortOption: (option: string | null) => void;
+  selectedSortOption?: string | null; 
+  setSelectedSortOption?: (option: string | null) => void;
 };
 
 const Filter: React.FC<TFilter> = ({

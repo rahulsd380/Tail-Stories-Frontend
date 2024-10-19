@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from "sonner";
+import { Suspense } from 'react';
 
 type TResetPasswordData = {
   email: string;
@@ -21,8 +22,10 @@ const ResetPasswordPage = () => {
     formState: { errors },
   } = useForm<TResetPasswordData>();
 
-  // Extract token from the query parameters
   const token = searchParams.get('token');
+if (!token) {
+  return <p>Error: Token is missing</p>;
+}
 
   const handleResetPassword = async (data: TResetPasswordData) => {
     const resetPasswordData = {
@@ -44,7 +47,8 @@ const ResetPasswordPage = () => {
 
 
     return (
-      <div className="w-full">
+      <Suspense fallback={<p>Loading...</p>}>
+  <div className="w-full">
         <form
           onSubmit={handleSubmit(handleResetPassword)}
           className="flex flex-col gap-4 w-full"
@@ -109,6 +113,7 @@ const ResetPasswordPage = () => {
           </p>
         </form>
       </div>
+</Suspense>
     );
   };
   

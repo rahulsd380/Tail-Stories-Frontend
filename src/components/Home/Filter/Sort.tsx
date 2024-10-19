@@ -6,8 +6,8 @@ import { useGetAllPostsQuery } from '@/redux/features/Posts/postsApi';
 import { TPost } from '../NewsFeed/Posts/posts.types';
 
 type TContentTypeFilter = {
-    selectedSortOption: string | null;
-  setSelectedSortOption: (category: string | null) => void;
+    selectedSortOption?: string | null;
+  setSelectedSortOption?: (category: string | null) => void;
 };
 
 const Sort: React.FC<TContentTypeFilter> = ({ setSelectedSortOption, selectedSortOption }) => {
@@ -40,7 +40,7 @@ const Sort: React.FC<TContentTypeFilter> = ({ setSelectedSortOption, selectedSor
         {contentTypes.map((type, index) => (
           <button
             key={index}
-            onClick={() => setSelectedSortOption(type.label)}
+            onClick={() => setSelectedSortOption!(type.label)}
             className={`${selectedSortOption === type.label ? "bg-primary-gradient text-white" : "bg-primary-70 text-primary-10/70"} font-medium flex items-center justify-between text-[15px] rounded-md px-3 py-3 w-full`}
           >
             <div className="flex items-center gap-2">

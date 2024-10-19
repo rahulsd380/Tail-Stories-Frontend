@@ -85,8 +85,8 @@ const ProfileCompletionStatus = () => {
 
         <div className="flex flex-col gap-3 mt-5">
             {
-                profileCompletionStatus.map(status => 
-                    <div className="flex items-center gap-3">
+                profileCompletionStatus.map((status, index) => 
+                    <div key={index} className="flex items-center gap-3">
         <TiTick className="text-xl text-green-600"/>
         <p className="text-primary-80 text-sm">{status}</p>
         </div>
