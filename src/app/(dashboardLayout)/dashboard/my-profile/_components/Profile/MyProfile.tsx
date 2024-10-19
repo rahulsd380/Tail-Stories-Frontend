@@ -16,7 +16,7 @@ import ProfileCompletionStatus from '../ProfileCompletionStatus/ProfileCompletio
 const MyProfile2 = () => {
     const {data, isLoading:isProfileLoading} = useGetMeQuery({});
     const [updateProfile] = useUpdateProfileMutation();
-    const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
+    const {data:myPosts, isLoading} = useGetmyPostsQuery(data?.data?._id);
     const [profileTab, setProfileTab] = useState("Personal Details");
     const profileTabButtons = ["Personal Details", "Posts", "My Followers", "Followings"];
 
@@ -38,6 +38,10 @@ const MyProfile2 = () => {
             console.log("No file selected");
         }
     };
+
+    if(isLoading){
+        return <p>Loading...</p>
+    }
 
     return (
         <div className="font-Lato">

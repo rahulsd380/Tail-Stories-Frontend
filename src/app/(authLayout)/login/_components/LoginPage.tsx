@@ -14,7 +14,7 @@ import Button from "@/components/Reusable/Button";
 import Link from "next/link";
 import { useLoginMutation } from "@/redux/features/Auth/authApi";
 import { useAppDispatch } from "@/redux/hooks";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/features/Auth/authSlice";
 import { verifyToken } from "@/utils/verifyToken";
 import { toast } from "sonner";
@@ -60,7 +60,7 @@ type TLoginData = {
 
 const LoginPage = () => {
   const [login, { isLoading: isLoginIn }] = useLoginMutation();
-  // const router = useRouter();
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
   const {
@@ -83,7 +83,7 @@ const LoginPage = () => {
 
       dispatch(setUser({ user, token: response.data.accessToken }));
       toast.success("Logged in successfully.");
-      // router.push("/");
+      router.push("/");
     } catch (err:any) {
       toast.error(err?.data?.message);
     }

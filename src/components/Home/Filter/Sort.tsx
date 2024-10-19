@@ -47,7 +47,6 @@ const Sort: React.FC<TContentTypeFilter> = ({ setSelectedSortOption, selectedSor
               {type.icon}
               <h1 className="capitalize">{type.label}</h1>
             </div>
-            <h1>{type?.postLength}</h1>
           </button>
         ))}
       </div>

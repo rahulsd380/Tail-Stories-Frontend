@@ -98,6 +98,9 @@ const PostModal: React.FC<TPostModalTypes> = ({
       console.log(response);
       if (response.success) {
         toast.success("Post created successfully.");
+        if(setOpenPostModal){
+          setOpenPostModal(false);
+        }
       }
     } catch (err) {
       console.log(err);
