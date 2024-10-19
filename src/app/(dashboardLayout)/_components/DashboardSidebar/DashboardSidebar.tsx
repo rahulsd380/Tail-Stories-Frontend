@@ -11,7 +11,7 @@ import {
 import { GoPerson } from "react-icons/go";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
-import { MdContentPaste, MdOutlinePayment, MdOutlinePostAdd } from "react-icons/md";
+import { MdOutlinePayment, MdOutlinePostAdd } from "react-icons/md";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { IMAGES } from "../../../../../public";

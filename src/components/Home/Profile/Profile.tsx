@@ -5,12 +5,17 @@ import Link from "next/link";
 import { ICONS } from '../../../../public/index';
 
 const Profile = () => {
-  const {data} = useGetMeQuery({});
+  const {data, isLoading} = useGetMeQuery({});
   console.log(data)
   const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-4 rounded-xl bg-[#F6F7F8] p-4 border font-Lato">
-      <div className="group relative size-[110px] rounded-full">
+      {
+        isLoading ?
+        <div className="size-28 rounded-full bg-gray-50 animate-pulse flex items-center justify-center">
+                    </div>
+                    :
+                    <div className="group relative size-[110px] rounded-full">
         {
           data?.data?.profilePicture ?
           <Image
@@ -32,11 +37,19 @@ const Profile = () => {
         <span className="absolute bottom-3 right-0 h-5 w-5 rounded-full border-[3px] border-white bg-green-500 "></span>
         <span className="absolute bottom-3 right-0 h-5 w-5 animate-ping rounded-full bg-green-500"></span>
       </div>
+
+      }
+      
      { 
      data?.data &&
       <div className="space-y-1 text-center">
         
-        <h1 className="text-lg xl:text-2xl text-gray-700 ">{data?.data?.name}</h1>
+        {
+          isLoading ?
+          <div className="bg-gray-50 w-[100px] h-3"></div>
+          :
+          <h1 className="text-lg xl:text-2xl text-gray-700 ">{data?.data?.name}</h1>
+        }
         <p className="text-sm text-gray-400">{data?.data?.userName}</p>
         {/* bio  */}
       <p className="pb-2 text-center text-sm text-gray-500 mt-2 max-w-[240px] mx-auto">

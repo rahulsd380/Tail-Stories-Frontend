@@ -9,7 +9,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { toast } from "sonner";
 import { logout } from "@/redux/features/Auth/authSlice";
 import { useGetMeQuery } from "@/redux/features/Auth/authApi";
-import {IoSettingsOutline, IoNotificationsOutline,} from "react-icons/io5";
+import {IoNotificationsOutline,} from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { GoPerson } from "react-icons/go";
 import { MdOutlineForwardToInbox } from "react-icons/md";

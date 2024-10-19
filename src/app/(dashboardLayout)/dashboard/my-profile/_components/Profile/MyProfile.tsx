@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState } from 'react';
 import { useGetMeQuery, useGetmyPostsQuery, useUpdateProfileMutation } from '@/redux/features/Auth/authApi';
@@ -14,7 +15,7 @@ import ProfileCompletionStatus from '../ProfileCompletionStatus/ProfileCompletio
 
 const MyProfile2 = () => {
     const {data, isLoading:isProfileLoading} = useGetMeQuery({});
-    const [updateProfile, {isLoading:isImageUpdating}] = useUpdateProfileMutation();
+    const [updateProfile] = useUpdateProfileMutation();
     const {data:myPosts} = useGetmyPostsQuery(data?.data?._id);
     const [profileTab, setProfileTab] = useState("Personal Details");
     const profileTabButtons = ["Personal Details", "Posts", "My Followers", "Followings"];
