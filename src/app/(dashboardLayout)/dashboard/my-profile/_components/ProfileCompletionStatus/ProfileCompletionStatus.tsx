@@ -26,7 +26,7 @@ const ProfileCompletionStatus = () => {
         "Update Notification Settings",
     ]
     return (
-        <div className="font-Lato bg-white border rounded-3xl p-7 w-full h-fit max-w-[300px]">
+        <div className="font-Lato bg-white border rounded-3xl p-7 w-full h-fit max-w-full lg:max-w-[300px]">
             <h1 className="text-primary-10 font-Lato text-xl font-bold">Complete Your Profile</h1>
 
             <div className="mt-5">

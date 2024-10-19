@@ -42,7 +42,7 @@ const MyProfile2 = () => {
     return (
         <div className="font-Lato">
             <h1 className="text-primary-10 font-Lato text-3xl font-bold mb-5">My Profile</h1>
-            <div className="flex gap-3">
+            <div className="flex flex-col lg:flex-row gap-3">
             <div className="bg-white border rounded-3xl p-7 w-full h-fit">
                 <div className="border-b pb-4 flex gap-5 items-center">
                     {/* Profile photo */}
@@ -86,21 +86,20 @@ const MyProfile2 = () => {
 
 
                 {/* profile tabs */}
-                <div className="flex items-center gap-9 mt-8">
-                    {
-                        profileTabButtons.map((buttonLabel, index) => 
-                            <button 
-    key={index} 
-    onClick={() => setProfileTab(buttonLabel)} 
-    className={`${profileTab === buttonLabel ? "border-primary-20 font-semibold text-primary-20" : "font-normal text-gray-500"} font-medium border-b-[2px] pb-2 transition duration-300`}
->
-    {buttonLabel}
-</button>
+                <div className="flex items-center gap-9 mt-8 overflow-x-auto whitespace-nowrap">
+  {
+    profileTabButtons.map((buttonLabel, index) => 
+      <button 
+        key={index} 
+        onClick={() => setProfileTab(buttonLabel)} 
+        className={`${profileTab === buttonLabel ? "border-primary-20 font-semibold text-primary-20" : "font-normal text-gray-500"} font-medium border-b-[2px] pb-2 transition duration-300 whitespace-nowrap`}
+      >
+        {buttonLabel}
+      </button>
+    )
+  }
+</div>
 
-                        )
-                    }
-               
-                </div>
 
 
                 <div className="flex flex-col gap-5 mt-5">

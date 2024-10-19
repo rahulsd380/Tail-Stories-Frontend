@@ -20,11 +20,11 @@ const CommonLayoutPage = () => {
         const contentTypeMatch = selectedContentType ? post.contentType === selectedContentType : true;
         return categoryMatch && contentTypeMatch;
     });
-
+    
     if (selectedSortOption === 'Most Upvoted Content') {
         filteredPosts = [...(filteredPosts || [])].sort((a, b) => b.upvotes.length - a.upvotes.length);
     } else if (selectedSortOption === 'Most Downvoted Content') {
-        filteredPosts = [...(filteredPosts || [])].sort((a, b) => a.downvotes.length - b.downvotes.length);
+        filteredPosts = [...(filteredPosts || [])].sort((a, b) => b.downvotes.length - a.downvotes.length);
     }
 
     return (

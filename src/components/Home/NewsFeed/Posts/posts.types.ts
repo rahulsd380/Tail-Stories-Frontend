@@ -1,3 +1,4 @@
+import { TUser } from "../../People/user.types";
 
 export type TVote = {
     userId: string;
@@ -24,5 +25,5 @@ export type TVote = {
     comments: TComment[];
     category: string;
     createdAt: Date;
-    authorId: string;
+    authorId: TUser;
   };

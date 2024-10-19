@@ -3,7 +3,7 @@ import Button from "@/components/Reusable/Button";
 import { useResetPasswordMutation } from "@/redux/features/Auth/authApi";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useRouter, useSearchParams } from 'next/navigation';  // Updated import
+import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from "sonner";
 
 type TResetPasswordData = {
@@ -12,8 +12,8 @@ type TResetPasswordData = {
 };
 
 const ResetPasswordPage = () => {
-  const router = useRouter(); // Now using next/navigation useRouter
-  const searchParams = useSearchParams(); // For accessing query params
+  const router = useRouter(); 
+  const searchParams = useSearchParams();
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const {
     register,
@@ -34,7 +34,7 @@ const ResetPasswordPage = () => {
     try {
       const response = await resetPassword({ token, resetPasswordData }).unwrap();
       console.log(response);
-      router.push("/"); // Redirect after successful reset
+      router.push("/");
       toast.success("Password reset successfully.");
     } catch (err) {
       console.log(err);

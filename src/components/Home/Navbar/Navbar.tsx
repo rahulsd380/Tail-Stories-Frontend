@@ -25,13 +25,11 @@ const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
   const user = useAppSelector(selectCurrentUser);
 
-  // To prevent hydration error, wait until the component is mounted
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   if (!isMounted) {
-    // Optionally, you can return null or a loading skeleton here
     return null;
   }
 

@@ -7,7 +7,7 @@ import CommentButton from "./CommentButton";
 import PostDescription from "./PostDescription";
 import PostImages from "./PostImages";
 import { TPost } from "./posts.types";
-import { useGetMeQuery, useGetUserByIdQuery } from "@/redux/features/Auth/authApi";
+import { useGetMeQuery } from "@/redux/features/Auth/authApi";
 import { useUpvotePostMutation } from "@/redux/features/Posts/postsApi";
 import Modal from "@/components/Modal/Modal";
 import { useState } from "react";
@@ -16,15 +16,11 @@ import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { TUser } from "./Comments";
 
-
-
 const PostCard = ({ post }: { post: TPost }) => {
   const user = useAppSelector(selectCurrentUser) as TUser | null;
   const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);
   const [upvotePost] = useUpvotePostMutation();
   const { data } = useGetMeQuery({});
-  const {data:userById} = useGetUserByIdQuery(post?.authorId)
-  console.log(userById?.data?.name)
   const isVerified = data?.data?.isVerified;
   const contentType = post?.contentType;
 
@@ -45,30 +41,31 @@ const PostCard = ({ post }: { post: TPost }) => {
     <div className="bg-[#F6F7F8] p-4 border rounded-xl font-Lato flex flex-col gap-4 mb-4">
       <div className="flex gap-4">
         <div className="size-10 rounded-full bg-white border flex items-center justify-center">
-        {
-          userById?.data?.profilePicture ?
-          <Image
-          width={40}
-          height={40}
-        className="size-10 rounded-full object-cover"
-          src={data?.data?.profilePicture}
-          alt=""
-        />
-        :
-        <Image
-          width={32}
-          height={32}
-          className="size-8 rounded-full object-cover"
-          src={ICONS.user}
-          alt=""
-        />
-        }
+          {post?.authorId?.profilePicture ? (
+            <Image
+              width={40}
+              height={40}
+              className="size-10 rounded-full object-cover"
+              src={data?.data?.profilePicture}
+              alt=""
+              quality={100}
+            />
+          ) : (
+            <Image
+              width={32}
+              height={32}
+              className="size-8 rounded-full object-cover"
+              src={ICONS.user}
+              alt=""
+              quality={100}
+            />
+          )}
         </div>
         {/* Profile / header */}
         <div className="w-full flex-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <h1 className="font-semibold text-primary-10">{userById?.data?.name}</h1>
+              <h1 className="font-semibold text-primary-10">{post?.authorId?.name}</h1>
 
               {isVerified && (
                 <Image
@@ -76,6 +73,7 @@ const PostCard = ({ post }: { post: TPost }) => {
                   width={16}
                   height={16}
                   alt="verified-icon"
+                  quality={100}
                 />
               )}
               {post?.contentType === "premium" && (
@@ -83,16 +81,16 @@ const PostCard = ({ post }: { post: TPost }) => {
                   src={ICONS.premium}
                   width={16}
                   height={16}
-                  alt="verified-icon"
+                  alt="premium-icon"
+                  quality={100}
                 />
               )}
             </div>
-            {
-            user?.userId === userById?.data?._id ?
-            <PostDropdown post={post} postId={post?._id} />
-            :
-            ""
-            }
+            {user?.userId === post?.authorId?._id ? (
+              <PostDropdown post={post} postId={post?._id} />
+            ) : (
+              ""
+            )}
           </div>
           <p className="text-sm text-primary-10/50">1 hr ago</p>
         </div>
@@ -125,7 +123,8 @@ const PostCard = ({ post }: { post: TPost }) => {
                 src={ICONS.like}
                 width={20}
                 height={20}
-                alt="verified-icon"
+                alt="like-icon"
+                quality={100}
               />
               {post?.upvotes?.length}
             </div>
@@ -134,7 +133,8 @@ const PostCard = ({ post }: { post: TPost }) => {
                 src={ICONS.comment}
                 width={20}
                 height={20}
-                alt="verified-icon"
+                alt="comment-icon"
+                quality={100}
               />
               {post?.comments?.length}
             </div>
@@ -150,7 +150,8 @@ const PostCard = ({ post }: { post: TPost }) => {
                 src={ICONS.like}
                 width={20}
                 height={20}
-                alt="verified-icon"
+                alt="like-icon"
+                quality={100}
               />
               Like
             </button>
@@ -165,11 +166,13 @@ const PostCard = ({ post }: { post: TPost }) => {
               downvotes={post?.downvotes}
               comments={post?.comments}
               contentType={contentType}
-                isVerified={isVerified}
-              
+              isVerified={isVerified}
             />
             {!isVerified && contentType === "premium" ? (
-              <button onClick={() => setOpenPaymentModal(true)} className="flex justify-center text-sm text-white bg-primary-gradient px-4 py-3 rounded-xl w-full">
+              <button
+                onClick={() => setOpenPaymentModal(true)}
+                className="flex justify-center text-sm text-white bg-primary-gradient px-4 py-3 rounded-xl w-full"
+              >
                 Unlock
               </button>
             ) : (
@@ -179,15 +182,13 @@ const PostCard = ({ post }: { post: TPost }) => {
         </div>
       </div>
 
-
-
       <Modal
-  openModal={openPaymentModal}
-  setOpenModal={setOpenPaymentModal}
-  classNames="max-w-[700px] w-full h-[470px]"
->
-  <PaymentModal setOpenPaymentModal={setOpenPaymentModal}/>
-</Modal>
+        openModal={openPaymentModal}
+        setOpenModal={setOpenPaymentModal}
+        classNames="max-w-[700px] w-full h-[470px]"
+      >
+        <PaymentModal setOpenPaymentModal={setOpenPaymentModal} />
+      </Modal>
     </div>
   );
 };

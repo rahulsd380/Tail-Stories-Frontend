@@ -48,15 +48,20 @@ const PeopleCard = ({ user }:{user:TUser}) => {
     <div className="flex items-center justify-between font-Inter border-b pb-2">
       <div className="flex items-center gap-3">
         {user?.profilePicture ? (
-          <div className="size-[50px] rounded-full bg-primary-70">
-            <Image
-              className="size-[50px] rounded-full object-cover"
-              src={IMAGES.img3}
-              alt="user"
-            />
-          </div>
+          <div className="w-[50px] h-[50px] rounded-full bg-primary-70">
+          <Image
+            width={50}
+            height={50}
+            className="w-[50px] h-[50px] rounded-full object-cover"
+            src={user?.profilePicture}
+            alt="user"
+            quality={100}
+          />
+        </div>
         ) : (
           <Image
+          width={0}
+            height={0}
             className="size-[30px] rounded-full object-cover"
             src={ICONS.user}
             alt="user-icon"

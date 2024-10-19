@@ -2,8 +2,17 @@
 import { useEffect, useState } from "react";
 import { ICONS } from "../../../../public";
 import Image from "next/image";
+import Link from "next/link";
+import { useGetMeQuery } from "@/redux/features/Auth/authApi";
+import { GoPerson } from "react-icons/go";
+import { RxDashboard } from "react-icons/rx";
+import {IoNewspaperOutline} from "react-icons/io5";
+import { usePathname } from 'next/navigation'
+
 
 const HamburgerMenu = () => {
+  const pathname = usePathname()
+  const {data} = useGetMeQuery({});
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
   const toggleHamburgerMenu = () => {
@@ -27,6 +36,25 @@ const HamburgerMenu = () => {
     };
   }, [isHamburgerOpen]);
 
+
+  const hamburgerMenuLinks = [
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+      icon: <RxDashboard className="text-[1.3rem]" />,
+    },
+    {
+      title: "My Profile",
+      href: "/dashboard/my-profile",
+      icon: <GoPerson className="text-[1.3rem]" />,
+    },
+    {
+      title: "News Feed",
+      href: "/",
+      icon: <IoNewspaperOutline className="text-[1.3rem]" />,
+    },
+  ];
+
   return (
     <div className="relative hamburgerMenu block lg:hidden">
       <Image
@@ -46,11 +74,66 @@ const HamburgerMenu = () => {
 
       {/* Side Menu */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 bg-white w-[290px] overflow-y-auto h-screen transition-all duration-300 transform ${
+        className={`p-3 fixed inset-y-0 right-0 z-50 bg-white w-[290px] overflow-y-auto h-screen transition-all duration-300 transform ${
           isHamburgerOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="w-full mt-5">Hello</div>
+        {/* Inner content here */}
+        <div className="flex items-center gap-3">
+        <div className="size-12 rounded-full bg-white border flex items-center justify-center">
+        {
+          data?.data?.profilePicture ?
+          <Image
+          width={40}
+          height={40}
+        className="size-11 rounded-full object-cover"
+          src={data?.data?.profilePicture}
+          alt=""
+        />
+        :
+        <Image
+          width={25}
+          height={25}
+          className="size-8 rounded-full object-cover"
+          src={ICONS.user}
+          alt=""
+        />
+        }
+        </div>
+
+        <div>
+        <h1 className="font-medium text-lg">{data?.data?.name}</h1>
+        <p className="text-xs mt-[2px]">{data?.data?.username ? data?.data?.username : "username not added"}</p>
+        </div>
+
+        </div>
+
+
+
+        {/* Links */}
+        <div className="flex flex-col gap-3 mt-10">
+          {
+            hamburgerMenuLinks.map((link, index) => (
+              <Link
+                key={index}
+                href={link.href}
+                className={`${pathname === link.href ? "bg-primary-gradient text-white" : "bg-white hover:bg-gray-50 text-gray-500"} flex justify-between items-center w-full  p-[5px] rounded-md cursor-pointer transition-all duration-200`}
+              >
+                <div className="flex items-center gap-[8px]">
+                  {link.icon}
+                  <p className="inline text-[1rem] font-[400] ">
+                    {link.title}
+                  </p>
+                </div>
+              </Link>
+            ))
+          }
+        </div>
+       
+
+
+
+
       </div>
     </div>
   );

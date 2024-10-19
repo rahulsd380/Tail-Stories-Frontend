@@ -55,7 +55,7 @@ const Location = ({ location }: { location: string }) => {
         />
         {errors.location && <span className="text-red-500">{errors.location.message}</span>} {/* Error message */}
 
-        <button type="submit" className="text-white bg-primary-gradient font-semibold rounded-xl px-4 py-[10px] hover:shadow transition duration-300 w-[200px] border">
+        <button type="submit" className="text-white bg-primary-gradient font-semibold rounded-xl px-1 md:px-4 py-[10px] hover:shadow transition duration-300 w-[150px] md:w-[200px] border text-xs md:text-base">
           {isLoading ? "Loading..." : "Save Changes"}
         </button>
       </form>

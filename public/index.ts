@@ -5,6 +5,7 @@ import img3 from "./assets/images/3.jpg";
 import authBgImage from "./assets/images/auth-bgImage.jpg";
 import team from "./assets/images/team.png";
 import vision from "./assets/images/vision.png";
+import lineBgImage from "./assets/images/line-bg-image.png";
 
 
 // Importing icons
@@ -130,4 +131,5 @@ export const IMAGES = {
     authBgImage,
     team,
     vision,
+    lineBgImage,
 };

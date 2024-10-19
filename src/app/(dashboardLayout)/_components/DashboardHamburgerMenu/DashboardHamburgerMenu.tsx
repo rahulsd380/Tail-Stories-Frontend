@@ -1,5 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from 'next/navigation'
+
 import { IoIosArrowDown, IoIosSearch } from "react-icons/io";
 import {
   IoMoonOutline,
@@ -14,88 +18,139 @@ import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { MdOutlinePayment, MdOutlinePostAdd } from "react-icons/md";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
-import { IMAGES } from "../../../../../public";
-import Image from "next/image";
-import Link from "next/link";
+import { IMAGES, ICONS } from "../../../../../public";
+
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/Auth/authSlice";
 import { TUser } from "@/components/Home/NewsFeed/Posts/Comments";
-import { usePathname } from 'next/navigation'
+
+
+
 
 const userLinks = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: <RxDashboard className="text-[1.3rem]" />,
-  },
-  {
-    title: "My Profile",
-    href: "/dashboard/my-profile",
-    icon: <GoPerson className="text-[1.3rem]" />,
-  },
-  {
-    title: "News Feed",
-    href: "/",
-    icon: <IoNewspaperOutline className="text-[1.3rem]" />,
-  },
-];
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+      icon: <RxDashboard className="text-[1.3rem]" />,
+    },
+    {
+      title: "My Profile",
+      href: "/dashboard/my-profile",
+      icon: <GoPerson className="text-[1.3rem]" />,
+    },
+    {
+      title: "News Feed",
+      href: "/",
+      icon: <IoNewspaperOutline className="text-[1.3rem]" />,
+    },
+  ];
+  
+  const adminLinks = [
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+      icon: <MdOutlineDashboardCustomize className="text-[1.3rem]" />,
+    },
+    {
+      title: "Users",
+      href: "/dashboard/manage-users",
+      icon: <FaUsers className="text-[1.3rem]" />,
+    },
+    {
+      title: "Payment History",
+      href: "/dashboard/payment-history",
+      icon: <MdOutlinePayment className="text-[1.3rem]" />,
+    },
+    {
+      title: "Create Post",
+      href: "/dashboard/create-post",
+      icon: <MdOutlinePostAdd className="text-[1.3rem]" />,
+    },
+    {
+      title: "My Profile",
+      href: "/dashboard/my-profile",
+      icon: <GoPerson className="text-[1.3rem]" />,
+    },
+  ];
+  
+  const socialEngagementLinks = [
+    { title: "Groups/Communities", href: "/groups" },
+    { title: "Events", href: "/events" },
+    { title: "Likes & Reactions", href: "/reactions" },
+    { title: "Saved Posts", href: "/saved-posts" },
+  ];
+  
+  const settingLinks = [
+    {
+      title: "Notification",
+      href: "/notifications",
+      icon: <IoNotificationsOutline className="text-[1.3rem] text-gray-500" />,
+    },
+    {
+      title: "Setting",
+      href: "/settings",
+      icon: <IoSettingsOutline className="text-[1.3rem] text-gray-500" />,
+    },
+  ];
 
-const adminLinks = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: <MdOutlineDashboardCustomize className="text-[1.3rem]" />,
-  },
-  {
-    title: "Users",
-    href: "/dashboard/manage-users",
-    icon: <FaUsers className="text-[1.3rem]" />,
-  },
-  {
-    title: "Payment History",
-    href: "/dashboard/payment-history",
-    icon: <MdOutlinePayment className="text-[1.3rem]" />,
-  },
-  {
-    title: "Create Post",
-    href: "/dashboard/create-post",
-    icon: <MdOutlinePostAdd className="text-[1.3rem]" />,
-  },
-  {
-    title: "My Profile",
-    href: "/dashboard/my-profile",
-    icon: <GoPerson className="text-[1.3rem]" />,
-  },
-];
 
-const socialEngagementLinks = [
-  { title: "Groups/Communities", href: "/groups" },
-  { title: "Events", href: "/events" },
-  { title: "Likes & Reactions", href: "/reactions" },
-  { title: "Saved Posts", href: "/saved-posts" },
-];
 
-const settingLinks = [
-  {
-    title: "Notification",
-    href: "/notifications",
-    icon: <IoNotificationsOutline className="text-[1.3rem] text-gray-500" />,
-  },
-  {
-    title: "Setting",
-    href: "/settings",
-    icon: <IoSettingsOutline className="text-[1.3rem] text-gray-500" />,
-  },
-];
-
-const DashboardSidebar = () => {
+const DashboardHamburgerMenu = () => {
   const pathname = usePathname()
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const user = useAppSelector(selectCurrentUser) as TUser | null;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
+
+  const toggleHamburgerMenu = () => {
+    setIsHamburgerOpen(!isHamburgerOpen);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const closestDropdown = (event.target as HTMLElement).closest(
+        ".hamburgerMenu"
+      );
+      if (isHamburgerOpen && closestDropdown === null) {
+        setIsHamburgerOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isHamburgerOpen]);
+
+
+
   return (
-    <aside className="custom-scrollbar bg-white border-r h-screen top-0 left-0 sticky overflow-y-auto boxShadow rounded-md transition-all duration-300 ease w-[250px] hidden lg:block">
+    <div className="relative hamburgerMenu block lg:hidden">
+      <Image
+        onClick={toggleHamburgerMenu}
+        src={ICONS.menu}
+        alt="menu-icon"
+        className="size-8 cursor-pointer"
+      />
+
+      {/* Background Overlay */}
+      <div
+        onClick={toggleHamburgerMenu}
+        className={`fixed inset-0 bg-black z-50 transition-opacity duration-300 ${
+          isHamburgerOpen ? "opacity-50" : "opacity-0 pointer-events-none"
+        }`}
+      ></div>
+
+      {/* Side Menu */}
+      <div
+        className={`p-3 fixed inset-y-0 left-0 z-50 bg-white w-[290px] overflow-y-auto h-screen transition-all duration-300 transform ${
+          isHamburgerOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Inner content here */}
+        <aside className="">
       <div className="mt-5 px-4">
         <Link
           href="/"
@@ -109,6 +164,15 @@ const DashboardSidebar = () => {
           />
           Tail Stories
         </Link>
+
+        {/* search bar */}
+        <div className="relative mt-5">
+          <input
+            className="px-4 py-2 border border-border rounded-md w-full pl-[40px] outline-none focus:border-primary"
+            placeholder="Search..."
+          />
+          <IoIosSearch className="absolute top-[9px] left-2 text-[1.5rem] text-[#adadad]" />
+        </div>
       </div>
 
       {/* general section */}
@@ -242,7 +306,14 @@ const DashboardSidebar = () => {
         </div>
       </div>
     </aside>
+       
+
+
+
+
+      </div>
+    </div>
   );
 };
 
-export default DashboardSidebar;
+export default DashboardHamburgerMenu;

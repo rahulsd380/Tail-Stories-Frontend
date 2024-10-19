@@ -5,7 +5,7 @@ import { ICONS } from '../../../../../public';
 
 const DashboardHeader = () => {
     return (
-        <div className="flex items-center justify-between py-[14px] w-full bg-white px-6 top-0 sticky z-20">
+        <div className="hidden lg:flex items-center justify-between py-[14px] w-full bg-white px-6 top-0 sticky z-20">
 
           <div className="hidden lg:block w-[300px]">
             <input 
