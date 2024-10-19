@@ -8,9 +8,17 @@ import { GoPerson } from "react-icons/go";
 import { RxDashboard } from "react-icons/rx";
 import {IoNewspaperOutline} from "react-icons/io5";
 import { usePathname } from 'next/navigation'
+import { FiSearch } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 
 const HamburgerMenu = () => {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    router.push(`/all-posts?search=${encodeURIComponent(searchQuery)}`);
+  };
   const pathname = usePathname()
   const {data} = useGetMeQuery({});
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
@@ -107,6 +115,20 @@ const HamburgerMenu = () => {
         </div>
 
         </div>
+
+        <div className="hidden lg:block relative">
+            <input
+            onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Find post"
+              type="text"
+              className="bg-primary-70 px-3 py-[10px] rounded-lg border border-primary-30 focus:outline-none focus:border-primary-20 transition duration-300 focus:shadow"
+            />
+           <FiSearch
+              onClick={handleSearch}
+              className="absolute top-1/2 right-3 transform -translate-y-1/2 text-primary-30 cursor-pointer"
+              size={20}
+            />
+          </div>
 
 
 

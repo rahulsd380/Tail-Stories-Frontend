@@ -108,7 +108,7 @@ const PostCard = ({ post }: { post: TPost }) => {
           />
 
           {/* Post Images */}
-          {isVerified && contentType === "premium" ? (
+          {!isVerified && contentType === "premium" ? (
             <div className="blur-md">
               <PostImages images={post?.images || []} />
             </div>
