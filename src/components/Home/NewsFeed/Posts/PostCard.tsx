@@ -46,7 +46,7 @@ const PostCard = ({ post }: { post: TPost }) => {
               width={40}
               height={40}
               className="size-10 rounded-full object-cover"
-              src={data?.data?.profilePicture}
+              src={post?.authorId?.profilePicture}
               alt=""
               quality={100}
             />
