@@ -114,7 +114,7 @@ const authApi = baseApi.injectEndpoints({
           url : `/auth/reset-password`,
           method : "POST",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
           },
           body: resetPasswordData,
       }),

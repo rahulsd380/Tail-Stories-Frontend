@@ -37,7 +37,7 @@ if (!token) {
     try {
       const response = await resetPassword({ token, resetPasswordData }).unwrap();
       console.log(response);
-      router.push("/");
+      router.push("/login");
       toast.success("Password reset successfully.");
     } catch (err) {
       console.log(err);
